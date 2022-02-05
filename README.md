@@ -7,7 +7,7 @@
       - [Propiedades](#propiedades)
     + [Item](#item)
       - [Propiedades](#propiedades-1)
-    + [Cuenta](#cuenta)
+    + [Usuario](#usuario)
       - [Propiedades](#propiedades-2)
     + [Comentario](#comentario)
       - [Propiedades](#propiedades-3)
@@ -68,10 +68,10 @@ Representa el objeto o ítem que se vende en una oferta. Almacena información r
 - **Nombre**: Un texto corto que identifica el ítem que se está vendiendo. Varios ítems diferentes pueden tener el mismo nombre.
 - **Categoria**: Un identificador de texto que indica la “categoría” del ítem para propósitos de filtrado en el buscador. Pertenece a un conjunto de categorías predefinido.
 
-### Cuenta
+### Usuario
 Representa la cuenta de un usuario registrado.
 #### Propiedades
-- **Nombre**: Un texto corto que identifica el usuario. Es único para cada cuenta.
+- **Nombre**: Un texto corto que identifica el usuario. Es único para cada usuario.
 - **Contraseña**: se utiliza para autenticar al usuario en el login.
 - **Puntuacion**: La puntuación de vendedor, derivada a partir de las puntuaciones que le dan los compradores de las ofertas.
 - **Comentarios**: Una lista de comentarios escritos por compradores de las ofertas que ha creado el usuario.
