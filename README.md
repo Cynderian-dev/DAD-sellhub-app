@@ -1,6 +1,7 @@
 # DAD-project
 - [Introducción](#introducción)
   * [Resumen del funcionamiento de la aplicación](#resumen-del-funcionamiento-de-la-aplicación)
+    + [Casos de uso](#casos-de-uso)
   * [Parte pública y privada de la aplicación](#parte-pública-y-privada-de-la-aplicación)
   * [Descripción de las entidades](#descripción-de-las-entidades)
     + [Oferta](#oferta)
@@ -41,6 +42,25 @@ Los usuarios registrados tienen cuentas. Las cuentas también tienen una serie d
 - Puede haber uno o varios **comentarios** (de compradores) asociados a una cuenta.
 
 Cuando un usuario _compra_ una oferta, debe puntuar al vendedor. La puntuación de vendedor de una cuenta es la media aritmética de todas las puntuaciones que recibe un usuario de este modo. Opcionalmente el comprador puede también dejar un comentario. Los comentarios tienen **autor** y **contenido**.
+
+### Casos de uso
+Casos de uso por actor:
+
+Todos los _Usuarios_ (en general, independientemente de si son usuarios registrados o anónimos) podrán:
+- **Consultar ofertas** (utilizando el buscador de ofertas)
+- **Consultar usuarios** (utilizando el buscador de usuarios)
+
+Los _Usuarios registrados_ (los usuarios que han iniciado sesión) además podrán:
+- **Crear ofertas**
+- **Eliminar ofertas** (consultándolas previamente)
+- **Comprar ofertas** (consultándolas previamente)
+
+Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podrán:
+- **Iniciar sesión**
+- **Crear una cuenta de usuario**
+
+[Imagen diagrama de casos de uso]
+
 ## Parte pública y privada de la aplicación
 Los usuarios no registrados de la aplicación podrán:
 - Consultar las ofertas (y filtrarlas).
