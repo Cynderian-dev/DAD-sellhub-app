@@ -55,7 +55,8 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 - **Iniciar sesión**
 - **Crear una cuenta de usuario**
 
-[Imagen diagrama de casos de uso]
+![Diagrama de casos de uso](https://user-images.githubusercontent.com/22685426/152697023-b3dca184-e24d-452c-8481-c2ec02035294.png)
+
 
 ## Parte pública y privada de la aplicación
 Los usuarios no registrados de la aplicación podrán:
