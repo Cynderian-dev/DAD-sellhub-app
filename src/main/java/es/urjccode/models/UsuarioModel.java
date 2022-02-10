@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 public class UsuarioModel {
 	@Id
@@ -14,6 +15,7 @@ public class UsuarioModel {
 	private String contrasenya;
 	private int cantidad_valoraciones;
 	private Float puntuacion;
+	@OneToMany
 	private List<ListaModel> listas_usuario;
 	
 	public UsuarioModel() {
