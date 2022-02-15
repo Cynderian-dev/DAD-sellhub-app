@@ -1,5 +1,9 @@
 package es.urjccode.repositories;
 
-public class OfertaRepo {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import es.urjccode.models.OfertaModel;
+
+public interface OfertaRepo extends JpaRepository<OfertaModel, Long>{
 
 }
