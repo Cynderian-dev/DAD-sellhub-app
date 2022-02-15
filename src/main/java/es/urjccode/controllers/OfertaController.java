@@ -15,7 +15,7 @@ public class OfertaController {
 		return "template_buscador_ofertas";
 	}
 	
-	@GetMapping("/detalles-oferta/{id}")
+	@GetMapping("/detalles-oferta/{id_oferta}")
 	public String mostrarDetallesOferta(Model model, @PathVariable Long id_oferta) {
 		
 		
