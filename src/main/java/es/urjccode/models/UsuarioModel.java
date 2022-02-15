@@ -1,5 +1,6 @@
 package es.urjccode.models;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -30,7 +31,7 @@ public class UsuarioModel {
 		this.contrasenya = contrasenya;
 		this.cantidad_valoraciones = cantidad_valoraciones;
 		this.puntuacion = puntuacion;
-		this.listas_usuario = listas_usuario;
+		this.listas_usuario = new ArrayList<ListaModel>();
 	}
 
 	public Long getId() {
