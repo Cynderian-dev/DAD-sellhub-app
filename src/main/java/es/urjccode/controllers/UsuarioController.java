@@ -11,5 +11,11 @@ public class UsuarioController {
 		
 		return "template_panel_usuario";
 	}
+	
+	@GetMapping("/buscador-usuarios")
+	public String mostrarBuscadorUsuarios() {
+		
+		return "template_buscador_usuarios";
+	}
 
 }
