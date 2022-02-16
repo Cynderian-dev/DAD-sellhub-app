@@ -1,5 +1,12 @@
 <html>
 <body>
-buscador usuarios
+<h1>Buscador usuarios</h1>
+<table>
+{{#lista_usuarios}}
+  <tr>
+    <td><a href="/panel-usuario/{{id}}">{{nombre}}</a></td>  
+  </tr>
+{{/lista_usuarios}}
+</table>
 </body>
 </html>
