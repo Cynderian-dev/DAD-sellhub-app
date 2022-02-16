@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class OfertaController {
 	
-	@GetMapping("/buscador-ofertas")
+	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
 		
 		
