@@ -1,5 +1,12 @@
 <html>
 <body>
-buscador ofertas
+<h1>Buscador ofertas</h1>
+<table>
+{{#lista_ofertas}}
+  <tr>
+    <td><a href="/detalles-oferta/{{id}}>Oferta de id {{id}}</a></td>
+  </tr>
+{{/lista_ofertas}}
+</table>
 </body>
 </html>
