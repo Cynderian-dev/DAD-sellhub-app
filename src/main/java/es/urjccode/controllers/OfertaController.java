@@ -41,6 +41,9 @@ public class OfertaController {
 	@GetMapping("/detalles-oferta/{id_oferta}")
 	public String mostrarDetallesOferta(Model model, @PathVariable Long id_oferta) {
 		
+		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		model.addAttribute("oferta_seleccionada", oferta);
+		model.addAttribute("nombre", oferta.getUsuario_creador().getNombre());
 		
 		return "template_detalles_oferta";
 	}
