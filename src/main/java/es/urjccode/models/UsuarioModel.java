@@ -17,7 +17,7 @@ public class UsuarioModel {
 	private String nombre;
 	private String contrasenya;
 	private int cantidad_valoraciones;
-	private Float puntuacion;
+	private double puntuacion;
 	@OneToMany
 	private List<ListaModel> listas_usuario;
 	
@@ -25,12 +25,11 @@ public class UsuarioModel {
 		
 	}
 
-	public UsuarioModel(String nombre, String contrasenya, int cantidad_valoraciones, Float puntuacion,
-			List<ListaModel> listas_usuario) {
+	public UsuarioModel(String nombre, String contrasenya, List<ListaModel> listas_usuario) {
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
-		this.cantidad_valoraciones = cantidad_valoraciones;
-		this.puntuacion = puntuacion;
+		this.cantidad_valoraciones = 0;
+		this.puntuacion = 0.0;
 		this.listas_usuario = new ArrayList<ListaModel>();
 	}
 
@@ -66,11 +65,11 @@ public class UsuarioModel {
 		this.cantidad_valoraciones = cantidad_valoraciones;
 	}
 
-	public Float getPuntuacion() {
+	public double getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(Float puntuacion) {
+	public void setPuntuacion(double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 
