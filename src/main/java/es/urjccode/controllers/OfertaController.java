@@ -1,17 +1,39 @@
 package es.urjccode.controllers;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.annotation.PostConstruct;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import es.urjccode.EnumCategorias;
+import es.urjccode.models.ListaModel;
+import es.urjccode.models.OfertaModel;
+import es.urjccode.models.UsuarioModel;
+import es.urjccode.repositories.OfertaRepo;
+import es.urjccode.repositories.UsuarioRepo;
+
 @Controller
 public class OfertaController {
 	
+	@Autowired
+	private UsuarioRepo usuarioRepo;
+	
+	@Autowired
+	private OfertaRepo ofertaRepo;
+	
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
-		
+		List<OfertaModel> ofertas = ofertaRepo.findAll();
+		model.addAttribute("lista_ofertas",ofertas);
 		
 		return "template_buscador_ofertas";
 	}
@@ -35,6 +57,25 @@ public class OfertaController {
 		
 		
 		return "template_crear_oferta";
+	}
+	
+	@PostConstruct
+	public void init() {
+		
+		UsuarioModel usu1 = new UsuarioModel("Pepe", "contrasenya",	new ArrayList<ListaModel>());
+		UsuarioModel usu2 = new UsuarioModel("Juan", "contrasenya",	new ArrayList<ListaModel>());
+		UsuarioModel usu3 = new UsuarioModel("Patxi", "contrasenya", new ArrayList<ListaModel>());
+		UsuarioModel usu4 = new UsuarioModel("Javier", "contrasenya", new ArrayList<ListaModel>());
+		
+		usuarioRepo.saveAll(Arrays.asList(usu1, usu2, usu3, usu4));
+		
+		OfertaModel oferta1 = new OfertaModel(5.0, "Casa", EnumCategorias.OTROS, LocalDateTime.now(), usu1);
+		OfertaModel oferta2 = new OfertaModel(57.30, "Zuecos", EnumCategorias.ZAPATILLAS, LocalDateTime.now(), usu1);
+		OfertaModel oferta3 = new OfertaModel(180.0, "Portatil viejo", EnumCategorias.ELECTRONICA, LocalDateTime.now(), usu3);
+		OfertaModel oferta4 = new OfertaModel(0.99, "Nemo", EnumCategorias.OTROS, LocalDateTime.now(), usu4);
+		
+		ofertaRepo.saveAll(Arrays.asList(oferta1, oferta2, oferta3, oferta4));
+		
 	}
 
 
