@@ -19,7 +19,7 @@ public class OfertaModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Float precio;
+	private double precio;
 	private String titulo;
 	@Enumerated(EnumType.STRING)
 	private EnumCategorias categoria;
@@ -36,7 +36,7 @@ public class OfertaModel {
 		
 	}
 
-	public OfertaModel(Float precio, String titulo, EnumCategorias categoria, LocalDateTime fecha_creacion,
+	public OfertaModel(double precio, String titulo, EnumCategorias categoria, LocalDateTime fecha_creacion,
 			UsuarioModel usuario_creador) {
 		this.precio = precio;
 		this.titulo = titulo;
@@ -53,11 +53,11 @@ public class OfertaModel {
 		this.id = id;
 	}
 
-	public Float getPrecio() {
+	public double getPrecio() {
 		return precio;
 	}
 
-	public void setPrecio(Float precio) {
+	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
 
