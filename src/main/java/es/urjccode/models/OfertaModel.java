@@ -117,7 +117,9 @@ public class OfertaModel {
 		this.fk_valoracion = fk_valoracion;
 	}
 	
-	
+	public String getNombreUsu() {
+		return usuario_creador.getNombre();
+	}
 	
 	
 }
