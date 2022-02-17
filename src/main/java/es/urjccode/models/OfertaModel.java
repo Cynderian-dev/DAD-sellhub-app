@@ -3,11 +3,15 @@ package es.urjccode.models;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
+import es.urjccode.EnumCategorias;
 
 @Entity
 public class OfertaModel {
@@ -17,7 +21,8 @@ public class OfertaModel {
 	private Long id;
 	private Float precio;
 	private String titulo;
-	private String categoria;
+	@Enumerated(EnumType.STRING)
+	private EnumCategorias categoria;
 	private LocalDateTime fecha_creacion;
 	private LocalDateTime fecha_cierre;
 	@ManyToOne
@@ -31,7 +36,7 @@ public class OfertaModel {
 		
 	}
 
-	public OfertaModel(Float precio, String titulo, String categoria, LocalDateTime fecha_creacion,
+	public OfertaModel(Float precio, String titulo, EnumCategorias categoria, LocalDateTime fecha_creacion,
 			UsuarioModel usuario_creador) {
 		this.precio = precio;
 		this.titulo = titulo;
@@ -64,11 +69,11 @@ public class OfertaModel {
 		this.titulo = titulo;
 	}
 
-	public String getCategoria() {
+	public EnumCategorias getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(String categoria) {
+	public void setCategoria(EnumCategorias categoria) {
 		this.categoria = categoria;
 	}
 
