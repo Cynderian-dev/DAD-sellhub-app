@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjccode.EnumCategorias;
 import es.urjccode.models.ListaModel;
@@ -56,10 +57,16 @@ public class OfertaController {
 	}
 	
 	@PostMapping("/crear-oferta")
-	public String crearOferta(Model model) {
+	public String crearOferta(Model model,
+			@RequestParam double input_precio,
+			@RequestParam String input_titulo,
+			@RequestParam String input_categoria) {
 		
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById((long) 1));
+		ofertaRepo.save(ofertaCreada);
 		
-		return "template_crear_oferta";
+		return "redirect:/buscador-ofertas";
 	}
 	
 	@PostConstruct
