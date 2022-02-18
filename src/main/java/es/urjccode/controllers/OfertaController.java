@@ -72,16 +72,16 @@ public class OfertaController {
 	@PostConstruct
 	public void init() {
 		
-		UsuarioModel usu1 = new UsuarioModel("Pepe", "contrasenya",	new ArrayList<ListaModel>());
-		UsuarioModel usu2 = new UsuarioModel("Juan", "contrasenya",	new ArrayList<ListaModel>());
-		UsuarioModel usu3 = new UsuarioModel("Patxi", "contrasenya", new ArrayList<ListaModel>());
+		UsuarioModel usu1 = new UsuarioModel("Patxi", "contrasenya", new ArrayList<ListaModel>());
+		UsuarioModel usu2 = new UsuarioModel("Pepe", "contrasenya",	new ArrayList<ListaModel>());
+		UsuarioModel usu3 = new UsuarioModel("Juan", "contrasenya",	new ArrayList<ListaModel>());
 		UsuarioModel usu4 = new UsuarioModel("Javier", "contrasenya", new ArrayList<ListaModel>());
 		
 		usuarioRepo.saveAll(Arrays.asList(usu1, usu2, usu3, usu4));
 		
-		OfertaModel oferta1 = new OfertaModel(5.0, "Casa", EnumCategorias.OTROS, LocalDateTime.now(), usu1);
-		OfertaModel oferta2 = new OfertaModel(57.30, "Zuecos", EnumCategorias.ZAPATILLAS, LocalDateTime.now(), usu1);
-		OfertaModel oferta3 = new OfertaModel(180.0, "Portatil viejo", EnumCategorias.ELECTRONICA, LocalDateTime.now(), usu3);
+		OfertaModel oferta3 = new OfertaModel(180.0, "Portatil viejo", EnumCategorias.ELECTRONICA, LocalDateTime.now(), usu1);
+		OfertaModel oferta2 = new OfertaModel(57.30, "Zuecos", EnumCategorias.ZAPATILLAS, LocalDateTime.now(), usu3);
+		OfertaModel oferta1 = new OfertaModel(5.0, "Casa", EnumCategorias.OTROS, LocalDateTime.now(), usu3);
 		OfertaModel oferta4 = new OfertaModel(0.99, "Nemo", EnumCategorias.OTROS, LocalDateTime.now(), usu4);
 		
 		ofertaRepo.saveAll(Arrays.asList(oferta1, oferta2, oferta3, oferta4));
