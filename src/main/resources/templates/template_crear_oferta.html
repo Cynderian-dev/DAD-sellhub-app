@@ -3,7 +3,18 @@
 <form method="POST", action="/crear-oferta">
 Precio: <input type="number", step="0.01", name="input_precio"><br>
 Título: <input type="text", name="input_titulo"><br>
-Categoría: <input type="text", name="input_categoria"><br>
+Categoría: 
+
+ELECTRONICA, LIBROS, ROPA, ZAPATILLAS, OTROS
+<select name="input_categoria">
+  <option value="ELECTRONICA">Electrónica</option>
+  <option value="LIBROS">Libros</option>
+  <option value="ROPA">Ropa</option>
+  <option value="ZAPATILLAS">Zapatillas</option>
+  <option value="OTROS">Otros</option>
+</select>
+
+
 <input type="submit", value="Crear oferta">
 </form>
 </body>
