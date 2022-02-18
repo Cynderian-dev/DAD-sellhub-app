@@ -3,6 +3,7 @@ package es.urjccode.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,6 +15,7 @@ public class UsuarioModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
+	@Column(unique=true)
 	private String nombre;
 	private String contrasenya;
 	private int cantidad_valoraciones;
