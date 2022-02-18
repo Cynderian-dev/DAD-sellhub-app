@@ -2,9 +2,18 @@
 <body>
 <h1>Buscador ofertas</h1>
 <table>
+<tr>
+	<td>Id</td>
+	<td>Titulo</td>
+	<td>Precio</td>
+	<td>Creador</td>
+</tr>
 {{#lista_ofertas}}
   <tr>
-    <td><a href="/detalles-oferta/{{id}}">Oferta de id {{id}}</a></td>
+    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+    <td>{{titulo}}</td>
+    <td>{{precio}}</td>
+    <td>{{nombreUsu}}</td>
   </tr>
 {{/lista_ofertas}}
 </table>
