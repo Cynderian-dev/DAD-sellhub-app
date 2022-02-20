@@ -95,6 +95,18 @@ public class OfertaController {
 		return "redirect:/buscador-ofertas";
 	}
 	
+	@GetMapping("/confirmacion-compra/{id_oferta}")
+	public String confirmacionCompra(Model model, @PathVariable Long id_oferta) {
+		
+		return "template_confirmacion_compra";
+	}
+	
+	@PostMapping("/comprar-oferta/{id_oferta}")
+	public String comprarOferta(Model model, @PathVariable Long id_oferta) {
+		
+		return "template_valoracion_oferta";
+	}
+	
 	@PostConstruct
 	public void init() {
 		
