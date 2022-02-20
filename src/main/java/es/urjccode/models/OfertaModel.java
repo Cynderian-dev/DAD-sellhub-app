@@ -44,6 +44,12 @@ public class OfertaModel {
 		this.fecha_creacion = fecha_creacion;
 		this.usuario_creador = usuario_creador;
 	}
+	
+	public void actualizar(double precio, String titulo, EnumCategorias categoria) {
+		this.precio = precio;
+		this.titulo = titulo;
+		this.categoria = categoria;
+	}
 
 	public Long getId() {
 		return id;
