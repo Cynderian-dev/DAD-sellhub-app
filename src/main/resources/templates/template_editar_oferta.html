@@ -1,5 +1,27 @@
 <html>
 <body>
-editar oferta
+{{>template_barra_navegacion_general}}
+<h1>Modificar oferta</h1>
+{{#oferta_seleccionada}}
+<form method="POST", action="/modificar-oferta/{{id}}">
+Precio actual: {{precio}} <br>
+Precio: <input type="number", step="0.01", value={{precio}}, name="input_precio", required><br>
+Titulo actual: {{titulo}} <br>
+Título: <input type="text", value={{titulo}} name="input_titulo", required><br>
+Categoria actual: {{categoria}} <br>
+Categoría: 
+
+<select name="input_categoria">
+  <option value="ELECTRONICA">Electrónica</option>
+  <option value="LIBROS">Libros</option>
+  <option value="ROPA">Ropa</option>
+  <option value="ZAPATILLAS">Zapatillas</option>
+  <option value="OTROS">Otros</option>
+</select> <br>
+
+
+<input type="submit", value="Modificar oferta">
+</form>
+{{/oferta_seleccionada}}
 </body>
 </html>
