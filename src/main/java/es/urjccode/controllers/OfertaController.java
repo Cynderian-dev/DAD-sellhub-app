@@ -101,6 +101,12 @@ public class OfertaController {
 		return "template_confirmacion_compra";
 	}
 	
+	@GetMapping("/valoracion-oferta/{id_oferta}")
+	public String valoracionOferta(Model model, @PathVariable Long id_oferta) {
+		
+		return "template_valoracion_oferta";
+	}
+	
 	@PostMapping("/comprar-oferta/{id_oferta}")
 	public String comprarOferta(Model model, @PathVariable Long id_oferta) {
 		
