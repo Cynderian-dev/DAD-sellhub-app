@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjccode.EnumCategorias;
@@ -65,6 +67,30 @@ public class OfertaController {
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById((long) 1));
 		ofertaRepo.save(ofertaCreada);
+		
+		return "redirect:/buscador-ofertas";
+	}
+	
+	@GetMapping("/editar-oferta/{id_oferta}")
+	public String editarOferta(Model model, @PathVariable Long id_oferta) {
+		
+		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		model.addAttribute("oferta_seleccionada", oferta);
+		
+		return "template_editar_oferta";
+	}
+	
+	@PostMapping("/modificar-oferta/{id_oferta}")
+	public String modificarOferta(Model model,
+			@PathVariable Long id_oferta,
+			@RequestParam double input_precio,
+			@RequestParam String input_titulo,
+			@RequestParam String input_categoria) {
+		
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		oferta.actualizar(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria));
+		ofertaRepo.save(oferta);
 		
 		return "redirect:/buscador-ofertas";
 	}
