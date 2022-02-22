@@ -45,7 +45,7 @@ public class OfertaController {
 		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		model.addAttribute("oferta_seleccionada", oferta);
-		model.addAttribute("nombre", oferta.getUsuario_creador().getNombre());
+		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
 		
 		return "template_detalles_oferta";
 	}

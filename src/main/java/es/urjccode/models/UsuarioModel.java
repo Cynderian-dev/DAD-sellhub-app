@@ -18,10 +18,10 @@ public class UsuarioModel {
 	@Column(unique=true)
 	private String nombre;
 	private String contrasenya;
-	private int cantidad_valoraciones;
+	private int cantidadValoraciones;
 	private double puntuacion;
 	@OneToMany
-	private List<ListaModel> listas_usuario;
+	private List<ListaModel> listasUsuario;
 	
 	public UsuarioModel() {
 		
@@ -30,9 +30,9 @@ public class UsuarioModel {
 	public UsuarioModel(String nombre, String contrasenya, List<ListaModel> listas_usuario) {
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
-		this.cantidad_valoraciones = 0;
+		this.cantidadValoraciones = 0;
 		this.puntuacion = 0.0;
-		this.listas_usuario = new ArrayList<ListaModel>();
+		this.listasUsuario = new ArrayList<ListaModel>();
 	}
 
 	public Long getId() {
@@ -59,12 +59,12 @@ public class UsuarioModel {
 		this.contrasenya = contrasenya;
 	}
 
-	public int getCantidad_valoraciones() {
-		return cantidad_valoraciones;
+	public int getCantidadValoraciones() {
+		return cantidadValoraciones;
 	}
 
-	public void setCantidad_valoraciones(int cantidad_valoraciones) {
-		this.cantidad_valoraciones = cantidad_valoraciones;
+	public void setCantidadValoraciones(int cantidad_valoraciones) {
+		this.cantidadValoraciones = cantidad_valoraciones;
 	}
 
 	public double getPuntuacion() {
@@ -75,12 +75,12 @@ public class UsuarioModel {
 		this.puntuacion = puntuacion;
 	}
 
-	public List<ListaModel> getListas_usuario() {
-		return listas_usuario;
+	public List<ListaModel> getListasUsuario() {
+		return listasUsuario;
 	}
 
-	public void setListas_usuario(List<ListaModel> listas_usuario) {
-		this.listas_usuario = listas_usuario;
+	public void setListasUsuario(List<ListaModel> listas_usuario) {
+		this.listasUsuario = listas_usuario;
 	}
 	
 	

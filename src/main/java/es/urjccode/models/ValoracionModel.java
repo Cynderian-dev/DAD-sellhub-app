@@ -16,9 +16,9 @@ public class ValoracionModel {
 	private Long id;
 	private Float puntuacion;
 	private String comentario;
-	private LocalDateTime fecha_creacion;
+	private LocalDateTime fechaCreacion;
 	@OneToOne
-	private OfertaModel fk_oferta;
+	private OfertaModel fkOferta;
 	
 	public ValoracionModel() {
 		
@@ -28,8 +28,8 @@ public class ValoracionModel {
 		super();
 		this.puntuacion = puntuacion;
 		this.comentario = comentario;
-		this.fecha_creacion = fecha_creacion;
-		this.fk_oferta = fk_oferta;
+		this.fechaCreacion = fecha_creacion;
+		this.fkOferta = fk_oferta;
 	}
 
 	public Long getId() {
@@ -56,20 +56,20 @@ public class ValoracionModel {
 		this.comentario = comentario;
 	}
 
-	public LocalDateTime getFecha_creacion() {
-		return fecha_creacion;
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
 	}
 
-	public void setFecha_creacion(LocalDateTime fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
+	public void setFechaCreacion(LocalDateTime fecha_creacion) {
+		this.fechaCreacion = fecha_creacion;
 	}
 
-	public OfertaModel getFk_oferta() {
-		return fk_oferta;
+	public OfertaModel getFkOferta() {
+		return fkOferta;
 	}
 
-	public void setFk_oferta(OfertaModel fk_oferta) {
-		this.fk_oferta = fk_oferta;
+	public void setFkOferta(OfertaModel fk_oferta) {
+		this.fkOferta = fk_oferta;
 	}
 	
 	
