@@ -26,14 +26,14 @@ public class OfertaModel {
 	private String titulo;
 	@Enumerated(EnumType.STRING)
 	private EnumCategorias categoria;
-	private LocalDateTime fecha_creacion;
-	private LocalDateTime fecha_cierre;
+	private LocalDateTime fechaCreacion;
+	private LocalDateTime fechaCierre;
 	@ManyToOne
-	private UsuarioModel usuario_creador;
+	private UsuarioModel usuarioCreador;
 	@ManyToOne
-	private UsuarioModel usuario_comprador;
+	private UsuarioModel usuarioComprador;
 	@OneToOne
-	private ValoracionModel fk_valoracion;
+	private ValoracionModel fkValoracion;
 	@ManyToMany(mappedBy="elementos")
 	private List<ListaModel> listas;
 	
@@ -41,13 +41,13 @@ public class OfertaModel {
 		
 	}
 
-	public OfertaModel(double precio, String titulo, EnumCategorias categoria, LocalDateTime fecha_creacion,
-			UsuarioModel usuario_creador) {
+	public OfertaModel(double precio, String titulo, EnumCategorias categoria, LocalDateTime fechaCreacion,
+			UsuarioModel usuarioCreador) {
 		this.precio = precio;
 		this.titulo = titulo;
 		this.categoria = categoria;
-		this.fecha_creacion = fecha_creacion;
-		this.usuario_creador = usuario_creador;
+		this.fechaCreacion = fechaCreacion;
+		this.usuarioCreador = usuarioCreador;
 		List<ListaModel> listas = new ArrayList<ListaModel>();
 		this.listas = listas;
 	}
@@ -90,48 +90,48 @@ public class OfertaModel {
 		this.categoria = categoria;
 	}
 
-	public LocalDateTime getFecha_creacion() {
-		return fecha_creacion;
+	public LocalDateTime getFechaCreacion() {
+		return fechaCreacion;
 	}
 
-	public void setFecha_creacion(LocalDateTime fecha_creacion) {
-		this.fecha_creacion = fecha_creacion;
+	public void setFechaCreacion(LocalDateTime fecha_creacion) {
+		this.fechaCreacion = fecha_creacion;
 	}
 
-	public LocalDateTime getFecha_cierre() {
-		return fecha_cierre;
+	public LocalDateTime getFechaCierre() {
+		return fechaCierre;
 	}
 
-	public void setFecha_cierre(LocalDateTime fecha_cierre) {
-		this.fecha_cierre = fecha_cierre;
+	public void setFechaCierre(LocalDateTime fecha_cierre) {
+		this.fechaCierre = fecha_cierre;
 	}
 
-	public UsuarioModel getUsuario_creador() {
-		return usuario_creador;
+	public UsuarioModel getUsuarioCreador() {
+		return usuarioCreador;
 	}
 
-	public void setUsuario_creador(UsuarioModel usuario_creador) {
-		this.usuario_creador = usuario_creador;
+	public void setUsuarioCreador(UsuarioModel usuario_creador) {
+		this.usuarioCreador = usuario_creador;
 	}
 
-	public UsuarioModel getUsuario_comprador() {
-		return usuario_comprador;
+	public UsuarioModel getUsuarioComprador() {
+		return usuarioComprador;
 	}
 
-	public void setUsuario_comprador(UsuarioModel usuario_comprador) {
-		this.usuario_comprador = usuario_comprador;
+	public void setUsuarioComprador(UsuarioModel usuario_comprador) {
+		this.usuarioComprador = usuario_comprador;
 	}
 
-	public ValoracionModel getFk_valoracion() {
-		return fk_valoracion;
+	public ValoracionModel getFkValoracion() {
+		return fkValoracion;
 	}
 
-	public void setFk_valoracion(ValoracionModel fk_valoracion) {
-		this.fk_valoracion = fk_valoracion;
+	public void setFkValoracion(ValoracionModel fk_valoracion) {
+		this.fkValoracion = fk_valoracion;
 	}
 	
 	public String getNombreUsu() {
-		return usuario_creador.getNombre();
+		return usuarioCreador.getNombre();
 	}
 	
 	public List<ListaModel> getListas() {

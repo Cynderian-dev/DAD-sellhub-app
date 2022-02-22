@@ -48,7 +48,7 @@ public class OfertaController {
 		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		model.addAttribute("oferta_seleccionada", oferta);
-		model.addAttribute("nombre", oferta.getUsuario_creador().getNombre());
+		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
 		
 		//usuario a fuego, implementar cuando este control de usuarios usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
