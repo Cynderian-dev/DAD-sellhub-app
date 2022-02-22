@@ -1,6 +1,8 @@
 package es.urjccode.models;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -8,6 +10,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -31,6 +34,8 @@ public class OfertaModel {
 	private UsuarioModel usuario_comprador;
 	@OneToOne
 	private ValoracionModel fk_valoracion;
+	@ManyToMany(mappedBy="elementos")
+	private List<ListaModel> listas;
 	
 	public OfertaModel() {
 		
@@ -43,6 +48,8 @@ public class OfertaModel {
 		this.categoria = categoria;
 		this.fecha_creacion = fecha_creacion;
 		this.usuario_creador = usuario_creador;
+		List<ListaModel> listas = new ArrayList<ListaModel>();
+		this.listas = listas;
 	}
 	
 	public void actualizar(double precio, String titulo, EnumCategorias categoria) {
@@ -127,5 +134,16 @@ public class OfertaModel {
 		return usuario_creador.getNombre();
 	}
 	
+	public List<ListaModel> getListas() {
+		return listas;
+	}
+
+	public void setListas(List<ListaModel> listas) {
+		this.listas = listas;
+	}
+	
+	public void addElemento(ListaModel e) {
+		this.listas.add(e);
+	}
 	
 }

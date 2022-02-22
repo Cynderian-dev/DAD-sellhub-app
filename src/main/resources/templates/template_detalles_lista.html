@@ -1,5 +1,17 @@
 <html>
 <body>
-detalles lista
+{{>template_barra_navegacion_general}}
+<h1>Detalles lista {{nombre}}</h1>
+<table>
+<tr>
+	<td>Id</td>
+	<td>Titulo</td>
+</tr>
+{{#lista_ofertas}}
+  <tr>
+    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+    <td>{{titulo}}</td>
+  </tr>
+{{/lista_ofertas}}
 </body>
 </html>

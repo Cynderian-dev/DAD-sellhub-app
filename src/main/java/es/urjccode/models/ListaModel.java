@@ -6,10 +6,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name="ListaModel")
 public class ListaModel {
 	
 	@Id
@@ -17,8 +19,8 @@ public class ListaModel {
 	private Long id;
 	private String nombre;
 	@ManyToOne
-	private UsuarioModel fk_usuario;
-	@OneToMany
+	private UsuarioModel fkUsuario;
+	@ManyToMany
 	private List<OfertaModel> elementos;
 	
 	public ListaModel() {
@@ -28,7 +30,7 @@ public class ListaModel {
 	public ListaModel(String nombre, UsuarioModel fk_usuario, List<OfertaModel> elementos) {
 		super();
 		this.nombre = nombre;
-		this.fk_usuario = fk_usuario;
+		this.fkUsuario = fk_usuario;
 		this.elementos = elementos;
 	}
 
@@ -48,12 +50,12 @@ public class ListaModel {
 		this.nombre = nombre;
 	}
 
-	public UsuarioModel getFk_usuario() {
-		return fk_usuario;
+	public UsuarioModel getFkUsuario() {
+		return fkUsuario;
 	}
 
-	public void setFk_usuario(UsuarioModel fk_usuario) {
-		this.fk_usuario = fk_usuario;
+	public void setFkUsuario(UsuarioModel fk_usuario) {
+		this.fkUsuario = fk_usuario;
 	}
 
 	public List<OfertaModel> getElementos() {
@@ -64,6 +66,8 @@ public class ListaModel {
 		this.elementos = elementos;
 	}
 	
-	
+	public void addElemento(OfertaModel e) {
+		this.elementos.add(e);
+	}
 
 }

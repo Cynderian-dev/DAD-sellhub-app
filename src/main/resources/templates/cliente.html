@@ -1,5 +1,15 @@
 <html>
 <body>
-	<p>Hello, {{name}}</p>
+<table>
+<tr>
+	<td>Id</td>
+	<td>Nombre</td>
+</tr>
+{{#lista}}
+  <tr>
+    <td><a href="/detalles-lista/{{id}}">{{id}}</a></td>
+    <td>{{nombre}}</td>
+  </tr>
+{{/lista}}
 </body>
 </html>

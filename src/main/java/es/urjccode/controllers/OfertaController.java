@@ -3,7 +3,6 @@ package es.urjccode.controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -20,6 +19,7 @@ import es.urjccode.EnumCategorias;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
+import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
 import es.urjccode.repositories.UsuarioRepo;
 
@@ -31,6 +31,9 @@ public class OfertaController {
 	
 	@Autowired
 	private OfertaRepo ofertaRepo;
+	
+	@Autowired
+	private ListaRepo listaRepo;
 	
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
@@ -46,6 +49,10 @@ public class OfertaController {
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		model.addAttribute("oferta_seleccionada", oferta);
 		model.addAttribute("nombre", oferta.getUsuario_creador().getNombre());
+		
+		//usuario a fuego, implementar cuando este control de usuarios usuarios
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuario));
 		
 		return "template_detalles_oferta";
 	}
@@ -140,6 +147,11 @@ public class OfertaController {
 		OfertaModel oferta4 = new OfertaModel(0.99, "Nemo", EnumCategorias.OTROS, LocalDateTime.now(), usu4);
 		
 		ofertaRepo.saveAll(Arrays.asList(oferta1, oferta2, oferta3, oferta4));
+		
+		List<OfertaModel> listadoOfertas = new ArrayList<OfertaModel>();
+		ListaModel lista1 = new ListaModel("mi lista", usu1, listadoOfertas);
+		
+		listaRepo.save(lista1);
 		
 	}
 

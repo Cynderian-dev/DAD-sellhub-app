@@ -30,5 +30,17 @@
    </tr>
 </table>
 {{/oferta_seleccionada}}
+
+<table>
+<tr>
+	<td>Id</td>
+	<td>Nombre</td>
+</tr>
+{{#lista_ofertas}}
+  <tr>
+    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+    <td>{{nombre}}</td>
+  </tr>
+{{/lista_ofertas}}
 </body>
 </html>
