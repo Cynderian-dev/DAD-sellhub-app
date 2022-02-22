@@ -3,6 +3,7 @@ package es.urjccode.controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -51,7 +52,12 @@ public class OfertaController {
 	
 	@GetMapping("/crear-oferta")
 	public String mostrarCrearOferta(Model model) {
-		
+		EnumCategorias[] listaCategorias = EnumCategorias.values();
+		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		for(int i = 0; i < listaCategorias.length; i++) {
+			lista.add(i, listaCategorias[i].toString()); 
+		}
+		model.addAttribute("categorias", lista);
 		
 		return "template_crear_oferta";
 	}
@@ -73,6 +79,14 @@ public class OfertaController {
 	public String editarOferta(Model model, @PathVariable Long id_oferta) {
 		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		
+		EnumCategorias[] listaCategorias = EnumCategorias.values();
+		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		for(int i = 0; i < listaCategorias.length; i++) {
+			lista.add(i, listaCategorias[i].toString()); 
+		}
+		
+		model.addAttribute("categorias", lista);
 		model.addAttribute("oferta_seleccionada", oferta);
 		
 		return "template_editar_oferta";

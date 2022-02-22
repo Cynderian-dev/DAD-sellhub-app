@@ -7,11 +7,9 @@ Título: <input type="text", name="input_titulo"><br>
 Categoría: 
 
 <select name="input_categoria">
-  <option value="ELECTRONICA">Electrónica</option>
-  <option value="LIBROS">Libros</option>
-  <option value="ROPA">Ropa</option>
-  <option value="ZAPATILLAS">Zapatillas</option>
-  <option value="OTROS">Otros</option>
+  {{#categorias}}
+  <option value="{{.}}">{{.}}</option>
+  {{/categorias}}
 </select>
 
 
