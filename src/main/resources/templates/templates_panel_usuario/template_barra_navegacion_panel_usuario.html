@@ -1,0 +1,17 @@
+<html>
+<body>
+{{>template_barra_navegacion_general}}
+<h1>Panel de usuario</h1>
+
+{{#usuario_seleccionado}}
+<div class="navpanelusuario">
+  <a href="/panel-usuario/{{id}}/informacion">Información</a>
+  <a href="/panel-usuario/{{id}}/listas">Mis listas</a>
+  <a href="/panel-usuario/{{id}}/ofertas">Mis ofertas</a>
+  <a href="/panel-usuario/{{id}}/valoraciones">Valoraciones</a>
+</div>
+{{/usuario_seleccionado}}
+
+
+</body>
+</html>

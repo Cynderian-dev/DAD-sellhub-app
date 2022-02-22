@@ -17,19 +17,36 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioRepo usuarioRepo;
 	
-	@GetMapping("/panel-usuario")
-	public String mostrarPanelUsuarioPersonal(Model model) {
+	@GetMapping("/panel-usuario/{id}/informacion")
+	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		model.addAttribute("usuario_seleccionado", usuarioRepo.getById((long) 1));
-		return "template_panel_usuario";
+		return "templates_panel_usuario/template_panel_usuario_informacion";
 	}
 	
-	@GetMapping("/panel-usuario/{id}")
-	public String mostrarPanelUsuario(Model model, @PathVariable Long id) {
+	@GetMapping("/panel-usuario/{id}/listas")
+	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
 		
-		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(id));
-		return "template_panel_usuario";
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById((long) 1));
+		return "templates_panel_usuario/template_panel_usuario_listas";
+	}
+	
+	@GetMapping("/panel-usuario/{id}/ofertas")
+	public String mostrarOfertasUsuario(Model model, @PathVariable Long id) {
+		
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById((long) 1));
+		return "templates_panel_usuario/template_panel_usuario_ofertas";
+	}
+	
+	@GetMapping("/panel-usuario/{id}/valoraciones")
+	public String mostrarValoracionesUsuario(Model model, @PathVariable Long id) {
+		
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById((long) 1));
+		return "templates_panel_usuario/template_panel_usuario_valoraciones";
 	}
 	
 	@GetMapping("/buscador-usuarios")
