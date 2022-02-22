@@ -150,7 +150,8 @@ public class OfertaController {
 		
 		List<OfertaModel> listadoOfertas = new ArrayList<OfertaModel>();
 		ListaModel lista1 = new ListaModel("mi lista", usu1, listadoOfertas);
-		
+		lista1.addElemento(oferta4);
+		lista1.addElemento(oferta2);
 		listaRepo.save(lista1);
 		
 	}

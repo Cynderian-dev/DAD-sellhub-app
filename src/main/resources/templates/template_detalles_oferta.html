@@ -18,29 +18,31 @@
    </tr>
    <tr>
    	<td>Creador: </td>
-   	<td>{{usuario_creador}}</td>
+   	<td>{{usuarioCreador}}</td>
    </tr>
    <tr>
    	<td>Fecha de creacion: </td>
-   	<td>{{fecha_creacion}}</td>
+   	<td>{{fechaCreacion}}</td>
    </tr>
    <tr>
    	<td>Usu: </td>
    	<td>{{nombreUsu}}</td>
    </tr>
 </table>
-{{/oferta_seleccionada}}
 
-<table>
-<tr>
-	<td>Id</td>
-	<td>Nombre</td>
-</tr>
-{{#lista_ofertas}}
-  <tr>
-    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
-    <td>{{nombre}}</td>
-  </tr>
-{{/lista_ofertas}}
+<form method="POST", action="/anyadir-lista/{id}"> 
+
+<input type="hidden" value="{{id}}" name="id_oferta">
+
+<select name="input_categoria">
+  {{#lista_listas}}
+  <option value="{{nombre}}">{{nombre}}</option>
+  {{/lista_listas}}
+</select>
+
+
+<input type="submit", value="Añadir">
+{{/oferta_seleccionada}}
+</form>
 </body>
 </html>

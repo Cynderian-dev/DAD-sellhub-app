@@ -10,5 +10,6 @@ import es.urjccode.models.UsuarioModel;
 public interface ListaRepo extends JpaRepository<ListaModel, Long>{
 	
 	List<ListaModel> findByfkUsuario(UsuarioModel fkUsuario);
+	List<ListaModel> findByfkUsuarioAndNombre(UsuarioModel fkUsuario, String nombre);
 
 }
