@@ -113,11 +113,19 @@ public class ListaController {
 			@PathVariable("id") Long idUsuario,
 			@RequestParam("input_nombre") String nombre) {
 		
-		// TODO: Prever el caso de error en el que ya exista otra lista del mismo nombre para el usuario
-		ListaModel nuevaLista = new ListaModel(nombre, usuarioRepo.getById(idUsuario));
-		listaRepo.save(nuevaLista);
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, nombre);
 		
-		return "redirect:/";
+		if(listas_usuario.size() == 0) {
+			ListaModel lista = new ListaModel(nombre, usuario);
+			listaRepo.save(lista);
+			model.addAttribute("informacion", "La lista ha sido creada con éxito");
+			return "redirect:/panel-usuario/" + idUsuario.toString() + "/listas";
+		} else {
+			model.addAttribute("error", "ya tienes una lista con ese nombre");
+			return "error";
+		}
+		
 	}
 
 }
