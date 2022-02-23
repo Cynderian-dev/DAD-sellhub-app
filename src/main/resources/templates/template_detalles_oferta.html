@@ -50,6 +50,14 @@
 <input type="submit", value="Comprar">
 </form>
 <!-- Sirve para ocultar al vendedor la opcion de compra {{/mostrar}} -->
+
+{{#borrado}}
+<form method="POST", action="/borrar-oferta/{id}"> 
+<input type="hidden" value="{{id}}" name="id_oferta">
+<input type="submit", value="Borrar">
+</form>
+{{/borrado}}
+
 {{/oferta_seleccionada}}
 
 </body>

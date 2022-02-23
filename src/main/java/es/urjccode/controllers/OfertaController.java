@@ -3,6 +3,7 @@ package es.urjccode.controllers;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -74,7 +75,18 @@ public class OfertaController {
 		//TODO: usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
-		model.addAttribute("mostrar", true);
+		if (usuario.getId() == oferta.getUsuarioCreador().getId()) {
+			model.addAttribute("borrado", true);
+		} else {
+			model.addAttribute("borrado", false);
+		}
+		
+		if(oferta.getUsuarioComprador() == null) {
+			System.out.println("hola");
+			model.addAttribute("mostrar", true);
+		} else {
+			model.addAttribute("mostrar", false);
+		}
 		
 		//esto seria para que no se le mostrase el boton comprar al usuario creador de la oferta
 		/*if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
@@ -206,6 +218,40 @@ public class OfertaController {
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
+	@PostMapping("/borrar-oferta/{id}")
+	public String borrarOferta(Model model,
+			@RequestParam String id_oferta) {
+		
+		long id_ofer = Long.parseLong(id_oferta);
+		
+		OfertaModel oferta = ofertaRepo.getById(id_ofer);
+		
+		// TODO: usuario a fuego, implementar cuando este control de usuarios
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		
+		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
+			model.addAttribute("error", "No es tu oferta");
+			return "error";
+		}
+		
+		if(oferta.getUsuarioComprador() != null) {
+			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
+			return "error";
+		}
+		
+		List<ListaModel> lista_listas = oferta.getListas();
+		for (ListaModel l:lista_listas) {
+			l.removeElemento(oferta);
+			listaRepo.save(l);
+		}
+		
+		oferta.setListas(new LinkedList<ListaModel>());
+		ofertaRepo.save(oferta);
+		ofertaRepo.delete(oferta);
+		
+		model.addAttribute("informacion", "La oferta ha sido borrado con éxito");
+		return "template_confirmacion_modificacion_oferta";
+	}
 	
 	@PostConstruct
 	public void init() {
