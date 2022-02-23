@@ -45,21 +45,46 @@ public class OfertaController {
 		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
 		model.addAttribute("lista_ofertas",ofertas);
 		
+		// Le paso los valores del enum al modelo
+		EnumCategorias[] listaCategorias = EnumCategorias.values();
+		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		for(int i = 0; i < listaCategorias.length; i++) {
+			lista.add(i, listaCategorias[i].toString()); 
+		}
+		model.addAttribute("categorias", lista);
+		
 		return "template_buscador_ofertas";
 	}
 	
 	@PostMapping("/buscador-ofertas")
 	public String mostrarBuscadorOfertasFiltrado(Model model,
 			@RequestParam("input_texto") String texto,
-			@RequestParam("input_precio") String precioMaximo) {
+			@RequestParam("input_precio") String precioMaximo,
+			@RequestParam("input_categoria") String categoria) {
+		
 		
 		List<OfertaModel> ofertas;
 		
-		if (precioMaximo == "") {
+		if (precioMaximo == "" && categoria.equals("TODAS")) {
+			// Búsqueda sin filtros (sólo el filtro de título)
 			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseOrderByPrecio(texto);
-		} else {
+		} else if (precioMaximo == "" && !categoria.equals("TODAS")) {
+			// Búsqueda filtrada por categoría
+			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndCategoriaEqualsOrderByPrecio(texto, EnumCategorias.valueOf(categoria));
+		} else if (precioMaximo != "" && categoria.equals("TODAS")) {
+			// Búsqueda filtrada por precio
 			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndPrecioLessThanOrderByPrecio(texto, Double.parseDouble(precioMaximo));
+		} else {
+			// Búsqueda filtrada por precio Y categoría
+			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndPrecioLessThanAndCategoriaEqualsOrderByPrecio(texto, Double.parseDouble(precioMaximo), EnumCategorias.valueOf(categoria));
 		}
+		
+		EnumCategorias[] listaCategorias = EnumCategorias.values();
+		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		for(int i = 0; i < listaCategorias.length; i++) {
+			lista.add(i, listaCategorias[i].toString()); 
+		}
+		model.addAttribute("categorias", lista);
 		
 		model.addAttribute("lista_ofertas", ofertas);
 		return "template_buscador_ofertas";
@@ -80,8 +105,14 @@ public class OfertaController {
 		/*if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
 			model.addAttribute("mostrar", false);
 		} else {
-			model.addAttribute("mostrar", true);
+			model.addAttribute("mostrar", true);EnumCategorias[] listaCategorias = EnumCategorias.values();
+		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		for(int i = 0; i < listaCategorias.length; i++) {
+			lista.add(i, listaCategorias[i].toString()); 
+		}
+		model.addAttribute("categorias", lista);
 		}*/
+		
 		
 		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuario));
 		
