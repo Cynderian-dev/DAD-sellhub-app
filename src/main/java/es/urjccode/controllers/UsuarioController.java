@@ -64,7 +64,7 @@ public class UsuarioController {
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
 		model.addAttribute("usuario_seleccionado", usuarioSeleccionado);
-		//model.addAttribute("lista_valoraciones", valoracionRepo.findByUsuarioValorado(usuarioSeleccionado));
+		model.addAttribute("lista_valoraciones", valoracionRepo.findByfkOfertaUsuarioCreador(usuarioSeleccionado));
 		
 		return "templates_panel_usuario/template_panel_usuario_valoraciones";
 	}
