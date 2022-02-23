@@ -2,6 +2,7 @@
 - [Introducción al funcionamiento de la aplicación](#introducción-al-funcionamiento-de-la-aplicación)
   * [Casos de uso](#casos-de-uso)
   * [Parte pública y privada de la aplicación](#parte-pública-y-privada-de-la-aplicación)
+  * [Diagrama de navegación](#diagrama-de-navegación)
   * [Descripción general de las entidades](#descripción-general-de-las-entidades)
     + [Oferta](#oferta)
     + [Usuario](#usuario)
@@ -35,6 +36,20 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 
 ![Diagrama de casos de uso](https://user-images.githubusercontent.com/22685426/152697023-b3dca184-e24d-452c-8481-c2ec02035294.png)
 
+## Diagrama de navegación
+
+
+| Captura de pantalla  | Descripción breve |
+| ------------- | ------------- |
+| ![Pantalla buscador ofertas](docs/images/Pantalla_buscador_ofertas.png)  | **Pantalla de buscador de ofertas**: Aquí se pueden consultar y filtrar las ofertas activas en SellHub en un momento dado.  |
+| ![Pantalla buscador usuarios](docs/images/Pantalla_buscador_usuarios.png) | **Pantalla de buscador de usuarios**: Aquí se pueden consultar los usuarios de SellHub.  |
+| ![Pantalla confirmacion compra](docs/images/Pantalla_confirmacion_compra.png) | **Pantalla de confirmación de compra**: Desde esta pantalla puede comprarse una oferta.  |
+| ![Pantalla crear oferta](docs/images/Pantalla_crear_oferta.png) | **Pantalla de creación de oferta**: Desde aquí los usuarios pueden crear ofertas.  |
+| ![Pantalla detalles lista](docs/images/Pantalla_detalles_lista.png) | **Pantalla de detalles de lista**: Aquí se pueden consultar los detalles (principalmente, los elementos) de las listas de un usuario.  |
+| ![Pantalla informacion usuario](docs/images/Pantalla_informacion_usuario.png) | **Panel de usuario - Información**: Aquí se puede consultar información de un usuario.  |
+| ![Pantalla listas usuario](docs/images/Pantalla_listas_usuario.png) | **Panel de usuario - listas**: Aquí un usuario puede consultar sus listas.  |
+| ![Pantalla ofertas usuario](docs/images/Pantalla_ofertas_usuario.png) | **Panel de usuario - ofertas**: Aquí un usuario puede consultar sus ofertas.   |
+| ![Pantalla valoraciones usuario](docs/images/Pantalla_valoraciones_usuario.png) | **Panel de usuario - valoraciones**: Aquí se pueden consultar las valoraciones que ha recibido un usuario.   |
 
 ## Parte pública y privada de la aplicación
 Los usuarios no registrados de la aplicación podrán:
