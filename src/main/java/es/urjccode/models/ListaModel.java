@@ -1,5 +1,6 @@
 package es.urjccode.models;
 
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,9 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity
-@Table(name="ListaModel")
+// Se añade una constraint para garantizar que no existen listas con el mismo nombre para el mismo usuario
+@Table(name="ListaModel", uniqueConstraints= @UniqueConstraint(name="UniqueFkUsuarioAndNombre", columnNames= {"fk_usuario_id", "nombre"}))
 public class ListaModel {
 	
 	@Id
@@ -32,6 +35,13 @@ public class ListaModel {
 		this.nombre = nombre;
 		this.fkUsuario = fk_usuario;
 		this.elementos = elementos;
+	}
+	
+	public ListaModel(String nombre, UsuarioModel fk_usuario) {
+		super();
+		this.nombre = nombre;
+		this.fkUsuario = fk_usuario;
+		this.elementos = new LinkedList<OfertaModel>();
 	}
 
 	public Long getId() {
