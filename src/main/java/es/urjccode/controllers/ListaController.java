@@ -42,15 +42,6 @@ public class ListaController {
 		return "template_detalles_lista";
 	}
 	
-	@GetMapping("/mis-listas")
-	public String mostrarListas(Model model) {
-		
-		List<ListaModel> lista = listaRepo.findAll();
-		model.addAttribute("lista", lista);
-		
-		return "mis_listas";
-	}
-	
 	@PostMapping("/anyadir-lista/{id_oferta}")
 	public String modificarOferta(Model model,
 			@RequestParam String id_oferta,
@@ -120,12 +111,6 @@ public class ListaController {
 		
 		model.addAttribute("informacion", "El elemento ha sido borrado con éxito");
 		return "template_confirmacion_modificacion_oferta";
-	}
-	
-	@GetMapping("/crear-lista")
-	public String mostrarCrearLista(Model model) {
-		
-		return "template_crear_lista";
 	}
 	
 	@PostMapping("/nueva-lista")
