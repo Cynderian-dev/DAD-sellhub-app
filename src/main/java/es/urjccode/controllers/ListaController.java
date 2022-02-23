@@ -2,6 +2,8 @@ package es.urjccode.controllers;
 
 import java.util.List;
 
+import javax.persistence.PersistenceException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.urjccode.EnumCategorias;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
@@ -66,6 +67,18 @@ public class ListaController {
 		listaRepo.save(lis);
 		
 		return "template_confirmacion_modificacion_oferta";
+	}
+	
+	@PostMapping("/panel-usuario/{id}/listas/crear-lista")
+	public String crearLista(Model model,
+			@PathVariable("id") Long idUsuario,
+			@RequestParam("input_nombre") String nombre) {
+		
+		// TODO: Prever el caso de error en el que ya exista otra lista del mismo nombre para el usuario
+		ListaModel nuevaLista = new ListaModel(nombre, usuarioRepo.getById(idUsuario));
+		listaRepo.save(nuevaLista);
+		
+		return "redirect:/";
 	}
 
 }
