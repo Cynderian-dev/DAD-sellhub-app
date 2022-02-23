@@ -51,6 +51,10 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 | ![Pantalla listas usuario](docs/images/Pantalla_listas_usuario.png) | **Panel de usuario - listas**: Aquí un usuario puede consultar sus listas.  |
 | ![Pantalla ofertas usuario](docs/images/Pantalla_ofertas_usuario.png) | **Panel de usuario - ofertas**: Aquí un usuario puede consultar sus ofertas.   |
 | ![Pantalla valoraciones usuario](docs/images/Pantalla_valoraciones_usuario.png) | **Panel de usuario - valoraciones**: Aquí se pueden consultar las valoraciones que ha recibido un usuario.   |
+| ![Pantalla valorar oferta](docs/images/Pantalla_valorar_oferta.png) | **Pantalla de valoración de oferta**: Aquí el usuario debe valorar la oferta que acaba de comprar.   |
+| ![Pantalla agradecimiento compra](docs/images/Pantalla_agradecimiento_compra.png) | **Pantalla de agradecimiento de compra**: Aquí se le agradece al usuario la compra realizada en SellHub. |
+| ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
+| ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
 
 ## Parte pública y privada de la aplicación
 Los usuarios no registrados de la aplicación podrán:
