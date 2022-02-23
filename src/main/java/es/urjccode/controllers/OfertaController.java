@@ -46,7 +46,7 @@ public class OfertaController {
 	@PostMapping("/buscador-ofertas")
 	public String mostrarBuscadorOfertasFiltrado(Model model,
 			@RequestParam("input_texto") String texto) {
-		List<OfertaModel> ofertas = ofertaRepo.findByTituloContainingIgnoreCase(texto);
+		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCase(texto);
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		return "template_buscador_ofertas";
