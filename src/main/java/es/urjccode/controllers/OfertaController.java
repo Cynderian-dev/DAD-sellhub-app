@@ -65,6 +65,8 @@ public class OfertaController {
 		//TODO: usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
+		model.addAttribute("mostrar", true);
+		
 		//esto seria para que no se le mostrase el boton comprar al usuario creador de la oferta
 		/*if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
 			model.addAttribute("mostrar", false);
