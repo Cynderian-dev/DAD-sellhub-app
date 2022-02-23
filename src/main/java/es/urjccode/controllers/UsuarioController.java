@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjccode.models.UsuarioModel;
 import es.urjccode.repositories.ListaRepo;
@@ -73,6 +75,15 @@ public class UsuarioController {
 	public String mostrarBuscadorUsuarios(Model model) {
 		
 		List<UsuarioModel> listaUsuarios = usuarioRepo.findAll();
+		model.addAttribute("lista_usuarios", listaUsuarios);
+		return "template_buscador_usuarios";
+	}
+	
+	@PostMapping("/buscador-usuarios")
+	public String mostrarBuscadorUsuariosFiltrado(Model model, @RequestParam("input_texto") String texto) {
+		
+		// TODO: filtrar con texto
+		List<UsuarioModel> listaUsuarios = usuarioRepo.findByNombreContainingIgnoreCase(texto);
 		model.addAttribute("lista_usuarios", listaUsuarios);
 		return "template_buscador_usuarios";
 	}

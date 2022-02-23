@@ -2,6 +2,12 @@
 <body>
 {{>template_barra_navegacion_general}}
 <h1>Buscador ofertas</h1>
+
+<form method="POST", action="/buscador-ofertas">
+<input type="text", name="input_texto">
+<input type="submit", value="Buscar">
+</form>
+
 <table>
 <tr>
 	<td>Id</td>
