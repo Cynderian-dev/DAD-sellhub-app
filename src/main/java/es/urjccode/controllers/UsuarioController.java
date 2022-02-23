@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.urjccode.Usuario;
 import es.urjccode.models.UsuarioModel;
 import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
@@ -18,6 +19,9 @@ import es.urjccode.repositories.ValoracionRepo;
 
 @Controller
 public class UsuarioController {
+	
+	@Autowired
+	private Usuario usuarioSession;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -35,7 +39,7 @@ public class UsuarioController {
 	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		model.addAttribute("usuario_seleccionado", usuarioRepo.getById((long) 1));
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(usuarioSession.getId()));
 		return "templates_panel_usuario/template_panel_usuario_informacion";
 	}
 	

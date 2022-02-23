@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import es.urjccode.EnumCategorias;
+import es.urjccode.Usuario;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
@@ -26,6 +27,9 @@ import es.urjccode.repositories.UsuarioRepo;
 
 @Controller
 public class OfertaController {
+	
+	@Autowired
+	private Usuario usuarioSession;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -42,6 +46,7 @@ public class OfertaController {
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		// Le paso los valores del enum al modelo
+		usuarioSession.setId(1);
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
 		List<String> lista = new ArrayList<String>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {
@@ -93,7 +98,7 @@ public class OfertaController {
 		model.addAttribute("oferta_seleccionada", oferta);
 		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
 		//TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		
 		if (usuario.getId() == oferta.getUsuarioCreador().getId()) {
 			if(oferta.getUsuarioComprador() == null) {
@@ -149,7 +154,7 @@ public class OfertaController {
 			@RequestParam String input_categoria) {
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById((long) 1));
+		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById(usuarioSession.getId()));
 		ofertaRepo.save(ofertaCreada);
 		
 		model.addAttribute("informacion", "Su oferta ha sido creada con éxito");
@@ -202,7 +207,7 @@ public class OfertaController {
 		
 		/*
 		//TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
 			model.addAttribute("error", "No te puedes comprar a ti mismo");
 			return "error";
@@ -221,7 +226,7 @@ public class OfertaController {
 		
 		
 		// TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		
 		oferta.setUsuarioComprador(usuario);
 		LocalDateTime fecha_cierre = LocalDateTime.now();
@@ -241,7 +246,7 @@ public class OfertaController {
 		OfertaModel oferta = ofertaRepo.getById(id_ofer);
 		
 		// TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		
 		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
 			model.addAttribute("error", "No es tu oferta");
