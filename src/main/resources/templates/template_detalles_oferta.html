@@ -42,7 +42,13 @@
 
 
 <input type="submit", value="Añadir">
-{{/oferta_seleccionada}}
 </form>
+
+<form method="POST", action="/confirmacion-compra/{id}"> 
+<input type="hidden" value="{{id}}" name="id_oferta">
+<input type="submit", value="Comprar">
+</form>
+{{/oferta_seleccionada}}
+
 </body>
 </html>

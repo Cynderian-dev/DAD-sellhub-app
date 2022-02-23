@@ -19,9 +19,11 @@ import es.urjccode.EnumCategorias;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
+import es.urjccode.models.ValoracionModel;
 import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
 import es.urjccode.repositories.UsuarioRepo;
+import es.urjccode.repositories.ValoracionRepo;
 
 @Controller
 public class OfertaController {
@@ -34,6 +36,9 @@ public class OfertaController {
 	
 	@Autowired
 	private ListaRepo listaRepo;
+	
+	@Autowired
+	private ValoracionRepo valoracionRepo;
 	
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
@@ -50,7 +55,7 @@ public class OfertaController {
 		model.addAttribute("oferta_seleccionada", oferta);
 		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
 		
-		//usuario a fuego, implementar cuando este control de usuarios usuarios
+		//usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuario));
 		
@@ -117,22 +122,48 @@ public class OfertaController {
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
-	@GetMapping("/confirmacion-compra/{id_oferta}")
-	public String confirmacionCompra(Model model, @PathVariable Long id_oferta) {
+	@PostMapping("/confirmacion-compra/{id_oferta}")
+	public String confirmacionCompra(Model model, 
+			@RequestParam String id_oferta) {
+		
+		Long id = Long.parseLong(id_oferta);
+		OfertaModel oferta = ofertaRepo.getById(id);
+		model.addAttribute("oferta_seleccionada", oferta);
 		
 		return "template_confirmacion_compra";
 	}
 	
-	@GetMapping("/valoracion-oferta/{id_oferta}")
-	public String valoracionOferta(Model model, @PathVariable Long id_oferta) {
+	@PostMapping("/comprar-oferta/{id_oferta}")
+	public String comprarOferta(Model model, 
+			@RequestParam String id_oferta,
+			@RequestParam double input_tarjeta) {
 		
+		Long id = Long.parseLong(id_oferta);
+		OfertaModel oferta = ofertaRepo.getById(id);
+		model.addAttribute("oferta_seleccionada", oferta);
+		
+		//usuario a fuego, implementar cuando este control de usuarios
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		
+		oferta.setUsuarioComprador(usuario);
+				
 		return "template_valoracion_oferta";
 	}
 	
-	@PostMapping("/comprar-oferta/{id_oferta}")
-	public String comprarOferta(Model model, @PathVariable Long id_oferta) {
+	@PostMapping("/valoracion-oferta/{id_oferta}")
+	public String valoracionOferta(Model model, 
+			@PathVariable Long id_oferta,
+			@RequestParam double input_puntuacion,
+			@RequestParam String input_comentario) {
 		
-		return "template_valoracion_oferta";
+		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		LocalDateTime fecha_creacion = LocalDateTime.now();
+		ValoracionModel valoracion = new ValoracionModel(input_puntuacion, input_comentario, fecha_creacion , oferta);
+		valoracionRepo.save(valoracion);
+		
+		model.addAttribute("informacion", "Gracias por su compra");
+		
+		return "template_confirmacion_modificacion_oferta";
 	}
 	
 	@PostConstruct

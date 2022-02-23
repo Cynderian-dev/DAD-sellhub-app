@@ -1,5 +1,18 @@
 <html>
 <body>
-confirmacion compra
+{{>template_barra_navegacion_general}}
+<h1>Usted va a comprar:</h1>
+{{#oferta_seleccionada}}
+
+Precio: {{precio}} <br>
+Titulo: {{titulo}} <br>
+Categoria: {{categoria}} <br>
+
+<form method="POST", action="/comprar-oferta/{id_oferta}">
+<input type="hidden" value="{{id}}" name="id_oferta">
+Tarjeta: <input type="number", step="1", name="input_tarjeta", required><br>
+<input type="submit", value="Comprar oferta">
+</form>
+{{/oferta_seleccionada}}
 </body>
 </html>

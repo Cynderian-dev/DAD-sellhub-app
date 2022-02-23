@@ -2,6 +2,7 @@ package es.urjccode.models;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,17 +15,17 @@ public class ValoracionModel {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	private Float puntuacion;
+	private Double puntuacion;
 	private String comentario;
 	private LocalDateTime fechaCreacion;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private OfertaModel fkOferta;
 	
 	public ValoracionModel() {
 		
 	}
 	
-	public ValoracionModel(Float puntuacion, String comentario, LocalDateTime fecha_creacion, OfertaModel fk_oferta) {
+	public ValoracionModel(Double puntuacion, String comentario, LocalDateTime fecha_creacion, OfertaModel fk_oferta) {
 		super();
 		this.puntuacion = puntuacion;
 		this.comentario = comentario;
@@ -40,11 +41,11 @@ public class ValoracionModel {
 		this.id = id;
 	}
 
-	public Float getPuntuacion() {
+	public Double getPuntuacion() {
 		return puntuacion;
 	}
 
-	public void setPuntuacion(Float puntuacion) {
+	public void setPuntuacion(Double puntuacion) {
 		this.puntuacion = puntuacion;
 	}
 
