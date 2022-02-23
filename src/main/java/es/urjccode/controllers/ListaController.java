@@ -74,6 +74,8 @@ public class ListaController {
 		} else {
 			lis.addElemento(oferta);
 			listaRepo.save(lis);
+			oferta.addElemento(lis);
+			ofertaRepo.save(oferta);
 			
 			model.addAttribute("informacion", "La oferta ha sido añadida con éxito");
 			return "template_confirmacion_modificacion_oferta";
