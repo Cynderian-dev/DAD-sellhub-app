@@ -169,6 +169,19 @@ public class OfertaController {
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
 		
+		// TODO: usuario a fuego, implementar cuando este control de usuarios
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
+				
+		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
+			model.addAttribute("error", "No es tu oferta");
+			return "error";
+		}
+				
+		if(oferta.getUsuarioComprador() != null) {
+			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
+			return "error";
+		}
+		
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
 		List<String> lista = new ArrayList<String>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {
