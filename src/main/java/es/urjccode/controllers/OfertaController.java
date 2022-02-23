@@ -53,7 +53,6 @@ public class OfertaController {
 			@RequestParam("input_texto") String texto) {
 		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCase(texto);
 		model.addAttribute("lista_ofertas",ofertas);
-
 		return "template_buscador_ofertas";
 	}
 	

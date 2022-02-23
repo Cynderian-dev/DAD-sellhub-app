@@ -11,6 +11,7 @@ import es.urjccode.models.UsuarioModel;
 public interface OfertaRepo extends JpaRepository<OfertaModel, Long>{
 	
 	List<OfertaModel> findByUsuarioCreador(UsuarioModel usuarioCreador);
+	
 	List<OfertaModel> findByFechaCierreNullAndTituloContainingIgnoreCase(String texto);
 
 }

@@ -70,35 +70,39 @@ Los usuarios registrados tendrán a su disposición toda la funcionalidad de la 
 - _Comprar_ ofertas.
 - Administrar su cuenta, por ejemplo cambiando la contraseña.
 
-## Descripción de las entidades
+## Descripción general de las entidades
 ### Oferta
-Representa una oferta de venta que ha creado un usuario, y que se destruye en el momento en que la oferta es comprada por otro usuario. Las ofertas pueden consultarse y filtrarse en un buscador que ofrece la aplicación tanto por usuarios registrados como anónimos, pero sólo pueden crearlas los usuarios registrados.
+Representa una oferta de venta que ha creado un usuario. Las ofertas pueden consultarse y filtrarse en un buscador que ofrece la aplicación tanto por usuarios registrados como anónimos, pero sólo pueden crearlas los usuarios registrados.
 #### Propiedades
 - **Vendedor**: El usuario que ha creado la oferta
 - **Precio**: El precio de venta establecido por el vendedor en el momento de la creación de la oferta.
-- **Item**: El ítem que se está vendiendo. Tendrá un nombre y una categoría. En el momento de creación de una oferta, el vendedor indica nombre y categoría del ítem que se oferta.
-- **Fecha** (de creación): La fecha en la que el vendedor creó la oferta. Se establece automáticamente.
-
-### Item
-Representa el objeto o ítem que se vende en una oferta. Almacena información relevante para la búsqueda/filtrado.
-#### Propiedades
-- **Nombre**: Un texto corto que identifica el ítem que se está vendiendo. Varios ítems diferentes pueden tener el mismo nombre.
-- **Categoria**: Un identificador de texto que indica la “categoría” del ítem para propósitos de filtrado en el buscador. Pertenece a un conjunto de categorías predefinido.
+- **Título**: Breve descripción de lo que se está vendiendo.
+- **Categoría**: Un identificador de texto que clasifica lo que se está vendiendo. Pertenece a un conjunto de categorías predefinido.
+- **Fecha (de creación)**: La fecha en la que el vendedor creó la oferta.
+- **Fecha (de cierre)**: La fecha en la que al oferta fue comprada por un usuario o cerrada por su creador.
 
 ### Usuario
 Representa la cuenta de un usuario registrado.
 #### Propiedades
 - **Nombre**: Un texto corto que identifica el usuario. Es único para cada usuario.
 - **Contraseña**: se utiliza para autenticar al usuario en el login.
-- **Puntuacion**: La puntuación de vendedor, derivada a partir de las puntuaciones que le dan los compradores de las ofertas.
-- **Comentarios**: Una lista de comentarios escritos por compradores de las ofertas que ha creado el usuario.
+- **Puntuacion**: La puntuación de vendedor, derivada a partir de las valoraciones de los compradores de sus ofertas.
+- **Valoraciones**: Las valoraciones recibidas por compradores de las ofertas que ha creado el usuario.
 
-### Comentario
-Representa un comentario sobre un vendedor que ha dejado un usuario tras comprar una oferta que el vendedor ha creado.
+### Valoracion
+Representa una valoración sobre un vendedor que ha dejado un usuario tras comprar una oferta que el vendedor ha creado.
 #### Propiedades
 - **Autor**: El usuario que ha escrito el comentario.
-- **Contenido**: El texto del comentario.
-- **Fecha**: La fecha de publicación del comentario. Se establece automáticamente.
+- **Puntuación**: Puntuación numérica que se le da al vendedor de la oferta.
+- **Comentario**: Un pequeño texto que acompaña a la puntuación.
+- **Fecha**: La fecha de publicación de la valoración. Se establece automáticamente.
+
+### Lista
+Representa una lista que ha creado un usuario para organizar las ofertas que le interesan.
+#### Propiedades
+- **Nombre**: El nombre de la lista. Un usuario no puede tener dos listas del mismo nombre.
+- **Propietario**: Usuario que ha creado y administra la lista.
+- **Contenido**: Las ofertas almacenadas en la lista.
 
 
 ## Descripción del servicio interno
