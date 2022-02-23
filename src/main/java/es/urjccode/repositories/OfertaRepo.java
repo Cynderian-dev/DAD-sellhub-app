@@ -12,4 +12,6 @@ public interface OfertaRepo extends JpaRepository<OfertaModel, Long>{
 	
 	List<OfertaModel> findByUsuarioCreador(UsuarioModel usuarioCreador);
 
+	List<OfertaModel> findByTituloContainingIgnoreCase(String texto);
+
 }
