@@ -13,10 +13,14 @@
 	<td>Nombre</td>
 </tr>
 {{#lista_listas}}
-	<tr>
+<tr>
+	<form method="POST", action="/borrar-lista/{{id}}">
+	<input type="hidden" value="{{id}}" name="id">
     <td><a href="/detalles-lista/{{id}}">{{id}}</a></td>
     <td>{{nombre}}</td>
-  </tr>
+    <td><input type="submit", value="borrar"></td>
+    </form>
+ </tr>
 {{/lista_listas}}
 
 </table>

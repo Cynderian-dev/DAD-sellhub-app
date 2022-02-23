@@ -81,6 +81,28 @@ public class ListaController {
 		
 	}
 	
+	@PostMapping("/borrar-lista/{id}")
+	public String borrarLista(Model model,
+			@RequestParam String id) {
+		
+		long id_lis = Long.parseLong(id);
+		
+		ListaModel lista = listaRepo.getById(id_lis);
+		
+		List<OfertaModel> lista_ofertas = lista.getElementos();
+		for (OfertaModel o:lista_ofertas) {
+			o.removeElemento(lista);
+			ofertaRepo.save(o);
+		}
+		
+		lista.setElementos(new LinkedList<OfertaModel>());
+		listaRepo.save(lista);
+		listaRepo.delete(lista);
+		
+		model.addAttribute("informacion", "La lista ha sido borrado con éxito");
+		return "template_confirmacion_modificacion_oferta";
+	}
+	
 	@PostMapping("/borrar-elemento/{id_oferta}")
 	public String borrarElemento(Model model,
 			@RequestParam String id_oferta,
