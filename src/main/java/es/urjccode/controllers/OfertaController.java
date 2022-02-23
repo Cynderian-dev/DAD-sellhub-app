@@ -150,7 +150,7 @@ public class OfertaController {
 		OfertaModel oferta = ofertaRepo.getById(id);
 		model.addAttribute("oferta_seleccionada", oferta);
 		
-		//usuario a fuego, implementar cuando este control de usuarios
+		// TODO: usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
 		oferta.setUsuarioComprador(usuario);
