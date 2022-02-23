@@ -62,7 +62,7 @@ public class ListaController {
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
 				
-		//usuario a fuego, implementar cuando este control de usuarios usuarios
+		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		List<ListaModel> lista = listaRepo.findByfkUsuarioAndNombre(usuario, input_categoria);
 		ListaModel lis = lista.get(0);
@@ -92,7 +92,7 @@ public class ListaController {
 	@PostMapping("/nueva-lista")
 	public String crearOferta(Model model, @RequestParam String input_nombre) {
 		
-		//usuario a fuego, implementar cuando este control de usuarios usuarios
+		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, input_nombre);
 		
