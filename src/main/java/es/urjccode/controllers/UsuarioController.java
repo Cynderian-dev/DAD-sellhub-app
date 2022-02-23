@@ -42,6 +42,7 @@ public class UsuarioController {
 	@GetMapping("/panel-usuario/{id}/listas")
 	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
 		
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
 		model.addAttribute("usuario_seleccionado", usuarioSeleccionado);
