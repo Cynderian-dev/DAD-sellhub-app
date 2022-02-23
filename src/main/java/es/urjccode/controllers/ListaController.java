@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import es.urjccode.Usuario;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
@@ -20,6 +21,9 @@ import es.urjccode.repositories.UsuarioRepo;
 
 @Controller
 public class ListaController {
+	
+	@Autowired
+	private Usuario usuarioSession;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -51,7 +55,8 @@ public class ListaController {
 		OfertaModel oferta = ofertaRepo.getById(id);
 				
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		List<ListaModel> lista = listaRepo.findByfkUsuarioAndNombre(usuario, input_categoria);
 		ListaModel lis = lista.get(0);
 		
@@ -117,7 +122,7 @@ public class ListaController {
 	public String crearOferta(Model model, @RequestParam String input_nombre) {
 		
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
 		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, input_nombre);
 		
 		if(listas_usuario.size() == 0) {
@@ -142,7 +147,7 @@ public class ListaController {
 		
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
-		// Comprueba si ya existe una lista del mismo nombre
+		//TODO: Comprueba si ya existe una lista del mismo nombre
 		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, nombre);
 		if(listas_usuario.size() == 0) {
 			ListaModel lista = new ListaModel(nombre, usuario);
