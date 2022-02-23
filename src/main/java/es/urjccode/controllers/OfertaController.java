@@ -50,9 +50,18 @@ public class OfertaController {
 	
 	@PostMapping("/buscador-ofertas")
 	public String mostrarBuscadorOfertasFiltrado(Model model,
-			@RequestParam("input_texto") String texto) {
-		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseOrderByPrecio(texto);
-		model.addAttribute("lista_ofertas",ofertas);
+			@RequestParam("input_texto") String texto,
+			@RequestParam("input_precio") String precioMaximo) {
+		
+		List<OfertaModel> ofertas;
+		
+		if (precioMaximo == "") {
+			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseOrderByPrecio(texto);
+		} else {
+			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndPrecioLessThanOrderByPrecio(texto, Double.parseDouble(precioMaximo));
+		}
+		
+		model.addAttribute("lista_ofertas", ofertas);
 		return "template_buscador_ofertas";
 	}
 	
