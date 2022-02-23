@@ -85,7 +85,7 @@ public class OfertaController {
 	}
 	
 	@GetMapping("/editar-oferta/{id_oferta}")
-	public String editarOferta(Model model, @PathVariable Long id_oferta) {
+	public String mostrarModificarOferta(Model model, @PathVariable Long id_oferta) {
 		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		
