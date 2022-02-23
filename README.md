@@ -38,6 +38,9 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 
 ## Diagrama de navegación
 
+![Diagrama navegacion](docs/images/diagrama_navegacion.png)
+
+A continuación se muestran capturas de pantalla de cada página y se indica su función en una breve descripción de la misma.
 
 | Captura de pantalla  | Descripción breve |
 | ------------- | ------------- |
@@ -102,6 +105,12 @@ Representa una lista que ha creado un usuario para organizar las ofertas que le 
 - **Propietario**: Usuario que ha creado y administra la lista.
 - **Contenido**: Las ofertas almacenadas en la lista.
 
+
+## Diagramas del modelo de datos
+### Diagrama de clases
+![Diagrama de clases](docs/images/diagrama_clases.png)
+### Diagrama Entidad-Relación
+![Diagrama E/R](docs/images/diagrama_entidad_relacion.png)
 
 ## Descripción del servicio interno
 La aplicación utilizará un servicio interno (no accesible de forma directa por los usuarios) de correo/mensajería para facilitar la comunicación entre compradores o entre comprador y vendedor. Utilizando este servicio, los usuarios podrán enviar y recibir mensajes de otros usuarios (además de consultar los mensajes que se hayan enviado o recibido en el pasado).
