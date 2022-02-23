@@ -5,5 +5,19 @@
 
 <h2>Mis ofertas</h2>
 
+<table>
+<tr>
+	<td>Id</td>
+	<td>Título</td>
+</tr>
+{{#lista_ofertas}}
+	<tr>
+    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+    <td>{{titulo}}</td>
+  </tr>
+{{/lista_ofertas}}
+
+</table>
+
 </body>
 </html>
