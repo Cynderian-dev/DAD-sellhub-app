@@ -147,4 +147,9 @@ public class OfertaModel {
 		this.listas.add(e);
 	}
 	
+	public void removeElemento(ListaModel e) {
+		this.listas.remove(e);
+
+	}
+	
 }

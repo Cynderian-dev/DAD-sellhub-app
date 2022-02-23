@@ -1,15 +1,12 @@
 package es.urjccode.controllers;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.persistence.PersistenceException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -40,6 +37,7 @@ public class ListaController {
 		ListaModel lista = listaRepo.getById(id_lista);
 		List<OfertaModel> lista_oferta = lista.getElementos();
 		model.addAttribute("lista_oferta", lista_oferta);
+		model.addAttribute("id_lista", lista.getId());
 		model.addAttribute("nombre", lista.getNombre());
 		
 		return "template_detalles_lista";
@@ -81,6 +79,26 @@ public class ListaController {
 			return "template_confirmacion_modificacion_oferta";
 		}
 		
+	}
+	
+	@PostMapping("/borrar-elemento/{id_oferta}")
+	public String borrarElemento(Model model,
+			@RequestParam String id_oferta,
+			@RequestParam String id_lista) {
+		
+		long id_lis = Long.parseLong(id_lista);
+		long id_of = Long.parseLong(id_oferta);
+		
+		ListaModel lista = listaRepo.getById(id_lis);
+		OfertaModel oferta = ofertaRepo.getById(id_of);
+		
+		oferta.removeElemento(lista);
+		ofertaRepo.save(oferta);
+		lista.removeElemento(oferta);
+		listaRepo.save(lista);
+		
+		model.addAttribute("informacion", "El elemento ha sido borrado con éxito");
+		return "template_confirmacion_modificacion_oferta";
 	}
 	
 	@GetMapping("/crear-lista")

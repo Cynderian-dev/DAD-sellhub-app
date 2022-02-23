@@ -9,8 +9,13 @@
 </tr>
 {{#lista_oferta}}
   <tr>
-    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+  	<form method="POST", action="/borrar-elemento/{{id_lista}}">
+  	<input type="hidden" value="{{id_lista}}" name="id_lista">
+  	<input type="hidden" value="{{id}}" name="id_oferta">
+    <td><a href="/detalles-oferta/{{id}}", name="id_oferta_table">{{id}}</a></td>
     <td>{{titulo}}</td>
+    <td><input type="submit", value="borrar"></td>
+	</form>
   </tr>
 {{/lista_oferta}}
 </body>

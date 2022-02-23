@@ -88,5 +88,10 @@ public class ListaModel {
 		}
 		return false;
 	}
+	
+	public void removeElemento(OfertaModel e) {
+		this.elementos.remove(e);
+
+	}
 
 }
