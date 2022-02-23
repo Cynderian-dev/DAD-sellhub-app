@@ -162,10 +162,12 @@ public class OfertaController {
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
-	@GetMapping("/editar-oferta/{id_oferta}")
-	public String mostrarModificarOferta(Model model, @PathVariable Long id_oferta) {
+	@PostMapping("/editar-oferta/{id_oferta}")
+	public String mostrarModificarOferta(Model model,
+			@RequestParam String id_oferta) {
 		
-		OfertaModel oferta = ofertaRepo.getById(id_oferta);
+		Long id = Long.parseLong(id_oferta);
+		OfertaModel oferta = ofertaRepo.getById(id);
 		
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
 		List<String> lista = new ArrayList<String>(listaCategorias.length);
