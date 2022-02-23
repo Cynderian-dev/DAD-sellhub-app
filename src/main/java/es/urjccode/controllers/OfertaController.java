@@ -148,12 +148,16 @@ public class OfertaController {
 		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
-		model.addAttribute("oferta_seleccionada", oferta);
+		
 		
 		// TODO: usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
 		oferta.setUsuarioComprador(usuario);
+		LocalDateTime fecha_cierre = LocalDateTime.now();
+		oferta.setFechaCierre(fecha_cierre);
+		ofertaRepo.save(oferta);
+		model.addAttribute("oferta_seleccionada", oferta);
 				
 		return "template_valoracion_oferta";
 	}
