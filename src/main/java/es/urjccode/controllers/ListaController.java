@@ -109,13 +109,15 @@ public class ListaController {
 	}
 	
 	@PostMapping("/panel-usuario/{id}/listas/crear-lista")
-	public String crearLista(Model model,
+	public String crearLista(
+			Model model,
 			@PathVariable("id") Long idUsuario,
 			@RequestParam("input_nombre") String nombre) {
 		
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
-		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, nombre);
 		
+		// Comprueba si ya existe una lista del mismo nombre
+		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, nombre);
 		if(listas_usuario.size() == 0) {
 			ListaModel lista = new ListaModel(nombre, usuario);
 			listaRepo.save(lista);
