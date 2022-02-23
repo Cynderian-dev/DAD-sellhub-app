@@ -2,6 +2,12 @@
 <body>
 {{>template_barra_navegacion_general}}
 <h1>Buscador usuarios</h1>
+
+<form method="POST", action="/buscador-usuarios">
+<input type="text", name="input_texto">
+<input type="submit", value="Buscar">
+</form>
+
 <table>
 {{#lista_usuarios}}
   <tr>
