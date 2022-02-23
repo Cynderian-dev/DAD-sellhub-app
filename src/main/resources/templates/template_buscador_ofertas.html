@@ -6,6 +6,13 @@
 <form method="POST", action="/buscador-ofertas">
 Título contiene: <input type="text", name="input_texto"><br>
 Precio por debajo de: <input type="number", step="0.01", min="0", name="input_precio"><br>
+Categoría: 
+<select name="input_categoria">
+  {{#categorias}}
+  <option value="{{.}}">{{.}}</option>
+  {{/categorias}}
+  <option value="TODAS">TODAS</option>
+</select><br>
 <input type="submit", value="Buscar">
 </form>
 
@@ -15,6 +22,7 @@ Precio por debajo de: <input type="number", step="0.01", min="0", name="input_pr
 	<td>Titulo</td>
 	<td>Precio</td>
 	<td>Creador</td>
+	<td>Categoría</td>
 </tr>
 {{#lista_ofertas}}
   <tr>
@@ -22,6 +30,7 @@ Precio por debajo de: <input type="number", step="0.01", min="0", name="input_pr
     <td>{{titulo}}</td>
     <td>{{precio}}</td>
     <td>{{nombreUsu}}</td>
+    <td>{{categoria}}</td>
   </tr>
 {{/lista_ofertas}}
 </table>
