@@ -42,7 +42,7 @@ public class OfertaController {
 	
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
-		List<OfertaModel> ofertas = ofertaRepo.findAll();
+		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		return "template_buscador_ofertas";
@@ -51,7 +51,7 @@ public class OfertaController {
 	@PostMapping("/buscador-ofertas")
 	public String mostrarBuscadorOfertasFiltrado(Model model,
 			@RequestParam("input_texto") String texto) {
-		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCase(texto);
+		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseOrderByPrecio(texto);
 		model.addAttribute("lista_ofertas",ofertas);
 		return "template_buscador_ofertas";
 	}
