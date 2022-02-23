@@ -20,11 +20,9 @@ import es.urjccode.EnumCategorias;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
-import es.urjccode.models.ValoracionModel;
 import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
 import es.urjccode.repositories.UsuarioRepo;
-import es.urjccode.repositories.ValoracionRepo;
 
 @Controller
 public class OfertaController {
@@ -37,9 +35,6 @@ public class OfertaController {
 	
 	@Autowired
 	private ListaRepo listaRepo;
-	
-	@Autowired
-	private ValoracionRepo valoracionRepo;
 	
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model) {
@@ -101,7 +96,11 @@ public class OfertaController {
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		
 		if (usuario.getId() == oferta.getUsuarioCreador().getId()) {
-			model.addAttribute("borrado", true);
+			if(oferta.getUsuarioComprador() == null) {
+				model.addAttribute("borrado", true);
+			} else {
+				model.addAttribute("borrado", false);
+			}
 		} else {
 			model.addAttribute("borrado", false);
 		}
@@ -231,22 +230,6 @@ public class OfertaController {
 		model.addAttribute("oferta_seleccionada", oferta);
 				
 		return "template_valoracion_oferta";
-	}
-	
-	@PostMapping("/valoracion-oferta/{id_oferta}")
-	public String valoracionOferta(Model model, 
-			@PathVariable Long id_oferta,
-			@RequestParam double input_puntuacion,
-			@RequestParam String input_comentario) {
-		
-		OfertaModel oferta = ofertaRepo.getById(id_oferta);
-		LocalDateTime fecha_creacion = LocalDateTime.now();
-		ValoracionModel valoracion = new ValoracionModel(input_puntuacion, input_comentario, fecha_creacion , oferta);
-		valoracionRepo.save(valoracion);
-		
-		model.addAttribute("informacion", "Gracias por su compra");
-		
-		return "template_confirmacion_modificacion_oferta";
 	}
 	
 	@PostMapping("/borrar-oferta/{id}")
