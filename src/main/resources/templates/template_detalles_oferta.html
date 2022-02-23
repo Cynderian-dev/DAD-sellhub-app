@@ -44,10 +44,12 @@
 <input type="submit", value="Añadir">
 </form>
 
+<!-- Sirve para ocultar al vendedor la opcion de compra {{#mostrar}} -->
 <form method="POST", action="/confirmacion-compra/{id}"> 
 <input type="hidden" value="{{id}}" name="id_oferta">
 <input type="submit", value="Comprar">
 </form>
+<!-- Sirve para ocultar al vendedor la opcion de compra {{/mostrar}} -->
 {{/oferta_seleccionada}}
 
 </body>

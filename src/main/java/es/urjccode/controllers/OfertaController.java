@@ -62,9 +62,16 @@ public class OfertaController {
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		model.addAttribute("oferta_seleccionada", oferta);
 		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
-		
 		//usuario a fuego, implementar cuando este control de usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		
+		//esto seria para que no se le mostrase el boton comprar al usuario creador de la oferta
+		/*if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
+			model.addAttribute("mostrar", false);
+		} else {
+			model.addAttribute("mostrar", true);
+		}*/
+		
 		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuario));
 		
 		return "template_detalles_oferta";
@@ -134,10 +141,20 @@ public class OfertaController {
 	public String confirmacionCompra(Model model, 
 			@RequestParam String id_oferta) {
 		
+		
+		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
 		model.addAttribute("oferta_seleccionada", oferta);
 		
+		/*
+		//usuario a fuego, implementar cuando este control de usuarios
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
+			model.addAttribute("error", "No te puedes comprar a ti mismo");
+			return "error";
+		}
+		*/
 		return "template_confirmacion_compra";
 	}
 	
