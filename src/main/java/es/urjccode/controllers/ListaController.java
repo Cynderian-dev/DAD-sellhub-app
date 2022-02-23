@@ -74,6 +74,7 @@ public class ListaController {
 			lis.addElemento(oferta);
 			listaRepo.save(lis);
 			
+			model.addAttribute("informacion", "La oferta ha sido añadida con éxito");
 			return "template_confirmacion_modificacion_oferta";
 		}
 		
@@ -96,6 +97,7 @@ public class ListaController {
 			List<OfertaModel> ofertas = new LinkedList<OfertaModel>();
 			ListaModel lista = new ListaModel(input_nombre, usuario, ofertas);
 			listaRepo.save(lista);
+			model.addAttribute("informacion", "La lista ha sido creada con éxito");
 			return "template_confirmacion_modificacion_oferta";
 		} else {
 			model.addAttribute("error", "ya tienes una lista con ese nombre");

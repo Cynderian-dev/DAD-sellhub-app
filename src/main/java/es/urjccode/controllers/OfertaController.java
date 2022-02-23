@@ -79,7 +79,9 @@ public class OfertaController {
 		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById((long) 1));
 		ofertaRepo.save(ofertaCreada);
 		
-		return "redirect:/buscador-ofertas";
+		model.addAttribute("informacion", "Su oferta ha sido creada con éxito");
+		
+		return "template_confirmacion_modificacion_oferta";
 	}
 	
 	@GetMapping("/editar-oferta/{id_oferta}")
@@ -109,6 +111,8 @@ public class OfertaController {
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		oferta.actualizar(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria));
 		ofertaRepo.save(oferta);
+		
+		model.addAttribute("informacion", "Su oferta ha sido modificada con exito");
 		
 		return "template_confirmacion_modificacion_oferta";
 	}
