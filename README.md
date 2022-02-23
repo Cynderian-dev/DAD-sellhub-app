@@ -9,8 +9,9 @@
     + [Valoracion](#valoración)
     + [Lista](#lista)
   * [Descripción del servicio interno](#descripción-del-servicio-interno)
+- [Diagramas del modelo de datos](#diagramas-del-modelo-de-datos)
 - [Navegación](#navegación)
-- [Modelo de datos](#modelo-de-datos)
+
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
@@ -38,26 +39,6 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 
 ## Diagrama de navegación
 
-![Diagrama navegacion](docs/images/diagrama_navegacion.png)
-
-A continuación se muestran capturas de pantalla de cada página y se indica su función en una breve descripción de la misma.
-
-| Captura de pantalla  | Descripción breve |
-| ------------- | ------------- |
-| ![Pantalla buscador ofertas](docs/images/Pantalla_buscador_ofertas.png)  | **Pantalla de buscador de ofertas**: Aquí se pueden consultar y filtrar las ofertas activas en SellHub en un momento dado.  |
-| ![Pantalla buscador usuarios](docs/images/Pantalla_buscador_usuarios.png) | **Pantalla de buscador de usuarios**: Aquí se pueden consultar los usuarios de SellHub.  |
-| ![Pantalla confirmacion compra](docs/images/Pantalla_confirmacion_compra.png) | **Pantalla de confirmación de compra**: Desde esta pantalla puede comprarse una oferta.  |
-| ![Pantalla crear oferta](docs/images/Pantalla_crear_oferta.png) | **Pantalla de creación de oferta**: Desde aquí los usuarios pueden crear ofertas.  |
-| ![Pantalla detalles lista](docs/images/Pantalla_detalles_lista.png) | **Pantalla de detalles de lista**: Aquí se pueden consultar los detalles (principalmente, los elementos) de las listas de un usuario.  |
-| ![Pantalla detalles oferta](docs/images/Pantalla_detalles_oferta.png) | **Pantalla de detalles de oferta**: Aquí se pueden consultar los detalles de una oferta y realizar operaciones como comprarla o borrarla.  |
-| ![Pantalla informacion usuario](docs/images/Pantalla_informacion_usuario.png) | **Panel de usuario - Información**: Aquí se puede consultar información de un usuario.  |
-| ![Pantalla listas usuario](docs/images/Pantalla_listas_usuario.png) | **Panel de usuario - listas**: Aquí un usuario puede consultar sus listas.  |
-| ![Pantalla ofertas usuario](docs/images/Pantalla_ofertas_usuario.png) | **Panel de usuario - ofertas**: Aquí un usuario puede consultar sus ofertas.   |
-| ![Pantalla valoraciones usuario](docs/images/Pantalla_valoraciones_usuario.png) | **Panel de usuario - valoraciones**: Aquí se pueden consultar las valoraciones que ha recibido un usuario.   |
-| ![Pantalla valorar oferta](docs/images/Pantalla_valorar_oferta.png) | **Pantalla de valoración de oferta**: Aquí el usuario debe valorar la oferta que acaba de comprar.   |
-| ![Pantalla agradecimiento compra](docs/images/Pantalla_agradecimiento_compra.png) | **Pantalla de agradecimiento de compra**: Aquí se le agradece al usuario la compra realizada en SellHub. |
-| ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
-| ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
 
 ## Parte pública y privada de la aplicación
 Los usuarios no registrados de la aplicación podrán:
@@ -117,7 +98,28 @@ La aplicación utilizará un servicio interno (no accesible de forma directa por
 
 # Navegación
 
-# Modelo de datos
+![Diagrama navegacion](docs/images/diagrama_navegacion.png)
+
+A continuación se muestran capturas de pantalla de cada página y se indica su función en una breve descripción de la misma.
+
+| Captura de pantalla  | Descripción breve |
+| ------------- | ------------- |
+| ![Pantalla buscador ofertas](docs/images/Pantalla_buscador_ofertas.png)  | **Pantalla de buscador de ofertas**: Aquí se pueden consultar y filtrar las ofertas activas en SellHub en un momento dado.  |
+| ![Pantalla buscador usuarios](docs/images/Pantalla_buscador_usuarios.png) | **Pantalla de buscador de usuarios**: Aquí se pueden consultar los usuarios de SellHub.  |
+| ![Pantalla confirmacion compra](docs/images/Pantalla_confirmacion_compra.png) | **Pantalla de confirmación de compra**: Desde esta pantalla puede comprarse una oferta.  |
+| ![Pantalla crear oferta](docs/images/Pantalla_crear_oferta.png) | **Pantalla de creación de oferta**: Desde aquí los usuarios pueden crear ofertas.  |
+| ![Pantalla detalles lista](docs/images/Pantalla_detalles_lista.png) | **Pantalla de detalles de lista**: Aquí se pueden consultar los detalles (principalmente, los elementos) de las listas de un usuario.  |
+| ![Pantalla detalles oferta](docs/images/Pantalla_detalles_oferta.png) | **Pantalla de detalles de oferta**: Aquí se pueden consultar los detalles de una oferta y realizar operaciones como comprarla o borrarla.  |
+| ![Pantalla informacion usuario](docs/images/Pantalla_informacion_usuario.png) | **Panel de usuario - Información**: Aquí se puede consultar información de un usuario.  |
+| ![Pantalla listas usuario](docs/images/Pantalla_listas_usuario.png) | **Panel de usuario - listas**: Aquí un usuario puede consultar sus listas.  |
+| ![Pantalla ofertas usuario](docs/images/Pantalla_ofertas_usuario.png) | **Panel de usuario - ofertas**: Aquí un usuario puede consultar sus ofertas.   |
+| ![Pantalla valoraciones usuario](docs/images/Pantalla_valoraciones_usuario.png) | **Panel de usuario - valoraciones**: Aquí se pueden consultar las valoraciones que ha recibido un usuario.   |
+| ![Pantalla valorar oferta](docs/images/Pantalla_valorar_oferta.png) | **Pantalla de valoración de oferta**: Aquí el usuario debe valorar la oferta que acaba de comprar.   |
+| ![Pantalla agradecimiento compra](docs/images/Pantalla_agradecimiento_compra.png) | **Pantalla de agradecimiento de compra**: Aquí se le agradece al usuario la compra realizada en SellHub. |
+| ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
+| ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
+
+
 
 
 
