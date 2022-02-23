@@ -1,5 +1,8 @@
 package es.urjccode.controllers;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,13 +44,13 @@ public class ListaController {
 		return "template_detalles_lista";
 	}
 	
-	@GetMapping("/cliente")
+	@GetMapping("/mis-listas")
 	public String mostrarListas(Model model) {
 		
 		List<ListaModel> lista = listaRepo.findAll();
 		model.addAttribute("lista", lista);
 		
-		return "cliente";
+		return "mis_listas";
 	}
 	
 	@PostMapping("/anyadir-lista/{id_oferta}")
@@ -66,6 +69,32 @@ public class ListaController {
 		listaRepo.save(lis);
 		
 		return "template_confirmacion_modificacion_oferta";
+	}
+	
+	@GetMapping("/crear-lista")
+	public String mostrarCrearLista(Model model) {
+		
+		return "template_crear_lista";
+	}
+	
+	@PostMapping("/nueva-lista")
+	public String crearOferta(Model model, @RequestParam String input_nombre) {
+		
+		//usuario a fuego, implementar cuando este control de usuarios usuarios
+		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
+		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, input_nombre);
+		
+		if(listas_usuario.size() == 0) {
+			List<OfertaModel> ofertas = new LinkedList<OfertaModel>();
+			ListaModel lista = new ListaModel(input_nombre, usuario, ofertas);
+			listaRepo.save(lista);
+			return "template_confirmacion_modificacion_oferta";
+		} else {
+			model.addAttribute("error", "ya tienes una lista con ese nombre");
+			return "error";
+		}
+		
+		
 	}
 
 }
