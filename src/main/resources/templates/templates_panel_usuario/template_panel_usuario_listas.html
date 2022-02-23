@@ -5,5 +5,26 @@
 
 <h2>Mis listas</h2>
 
+
+
+<table>
+<tr>
+	<td>Id</td>
+	<td>Nombre</td>
+</tr>
+{{#lista_listas}}
+	<tr>
+    <td><a href="/detalles-lista/{{id}}">{{id}}</a></td>
+    <td>{{nombre}}</td>
+  </tr>
+{{/lista_listas}}
+
+</table>
+
+<form method="POST", action="/panel-usuario/{{id}}/listas/crear-lista">
+<input type="text", name="input_nombre">
+<input type="submit", value="Crear lista">
+</form>
+
 </body>
 </html>
