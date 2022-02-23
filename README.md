@@ -46,6 +46,7 @@ Los _Usuarios anónimos_ (los usuarios que no han iniciado sesión) además podr
 | ![Pantalla confirmacion compra](docs/images/Pantalla_confirmacion_compra.png) | **Pantalla de confirmación de compra**: Desde esta pantalla puede comprarse una oferta.  |
 | ![Pantalla crear oferta](docs/images/Pantalla_crear_oferta.png) | **Pantalla de creación de oferta**: Desde aquí los usuarios pueden crear ofertas.  |
 | ![Pantalla detalles lista](docs/images/Pantalla_detalles_lista.png) | **Pantalla de detalles de lista**: Aquí se pueden consultar los detalles (principalmente, los elementos) de las listas de un usuario.  |
+| ![Pantalla detalles oferta](docs/images/Pantalla_detalles_oferta.png) | **Pantalla de detalles de oferta**: Aquí se pueden consultar los detalles de una oferta y realizar operaciones como comprarla o borrarla.  |
 | ![Pantalla informacion usuario](docs/images/Pantalla_informacion_usuario.png) | **Panel de usuario - Información**: Aquí se puede consultar información de un usuario.  |
 | ![Pantalla listas usuario](docs/images/Pantalla_listas_usuario.png) | **Panel de usuario - listas**: Aquí un usuario puede consultar sus listas.  |
 | ![Pantalla ofertas usuario](docs/images/Pantalla_ofertas_usuario.png) | **Panel de usuario - ofertas**: Aquí un usuario puede consultar sus ofertas.   |
