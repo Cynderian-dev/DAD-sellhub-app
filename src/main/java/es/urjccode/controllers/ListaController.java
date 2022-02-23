@@ -59,16 +59,24 @@ public class ListaController {
 			@RequestParam String input_categoria) {
 		
 		Long id = Long.parseLong(id_oferta);
+		OfertaModel oferta = ofertaRepo.getById(id);
 				
 		//usuario a fuego, implementar cuando este control de usuarios usuarios
 		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
 		List<ListaModel> lista = listaRepo.findByfkUsuarioAndNombre(usuario, input_categoria);
 		ListaModel lis = lista.get(0);
-		OfertaModel oferta = ofertaRepo.getById(id);
-		lis.addElemento(oferta);
-		listaRepo.save(lis);
 		
-		return "template_confirmacion_modificacion_oferta";
+		if(lis.buscarOferta(id)) {
+			String errorConstruido = "ya tienes el elemento " + oferta.getTitulo() +" en la lista " + lis.getNombre();
+			model.addAttribute("error", errorConstruido);
+			return "error";
+		} else {
+			lis.addElemento(oferta);
+			listaRepo.save(lis);
+			
+			return "template_confirmacion_modificacion_oferta";
+		}
+		
 	}
 	
 	@GetMapping("/crear-lista")

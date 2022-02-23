@@ -70,4 +70,13 @@ public class ListaModel {
 		this.elementos.add(e);
 	}
 
+	public boolean buscarOferta(long oferta) {
+		for (OfertaModel o:elementos) {
+			if (o.getId() == oferta) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
