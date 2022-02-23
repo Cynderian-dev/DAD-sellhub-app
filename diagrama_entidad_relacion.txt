@@ -1,0 +1,13 @@
+@startuml
+
+class           usuario
+class           lista
+class           valoracion
+class           oferta
+
+usuario "1" -- "n" lista : tiene
+lista "n" -- "n" oferta : contienen
+valoracion "1" -- "1" oferta : recibe
+usuario "1" -- "n" oferta : crea
+
+@enduml

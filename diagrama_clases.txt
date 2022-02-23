@@ -1,0 +1,42 @@
+@startuml
+
+entity          usuarioModel
+entity          listaModel
+entity          valoracionModel
+entity          ofertaModel
+enum            categorias
+interface       listaRepo
+interface       usuarioRepo
+interface       valoracionRepo
+interface       ofertaRepo
+class           usuarioController
+class           listaController
+class           valoracionController
+class           ofertaController
+
+
+listaRepo -- listaController
+listaRepo -- ofertaController
+listaRepo -- usuarioController
+usuarioRepo -- listaController
+usuarioRepo -- ofertaController
+usuarioRepo -- usuarioController
+valoracionRepo -- valoracionController
+ofertaRepo -- listaController
+ofertaRepo -- ofertaController
+ofertaRepo -- usuarioController
+ofertaRepo -- valoracionController
+
+listaModel -- listaController
+listaModel -- ofertaController
+listaModel -- usuarioController
+usuarioModel -- listaController
+valoracionModel -- valoracionController
+ofertaModel -- listaController
+ofertaModel -- ofertaController
+ofertaModel -- usuarioController
+ofertaModel -- valoracionController
+
+categorias -- ofertaController
+
+@enduml
