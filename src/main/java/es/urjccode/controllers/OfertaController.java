@@ -45,8 +45,10 @@ public class OfertaController {
 		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
 		model.addAttribute("lista_ofertas",ofertas);
 		
-		// Le paso los valores del enum al modelo
+		//TODO: ya no le hacemos set
 		usuarioSession.setId(1);
+		
+		// Le paso los valores del enum al modelo
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
 		List<String> lista = new ArrayList<String>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {

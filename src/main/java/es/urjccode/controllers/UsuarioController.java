@@ -43,6 +43,26 @@ public class UsuarioController {
 		return "templates_panel_usuario/template_panel_usuario_informacion";
 	}
 	
+	@GetMapping("/login")
+	public String login() {
+		return "login";
+	}
+	
+	@GetMapping("/logout-done")
+	public String logoutDone() {
+		return "logout_done";
+	}
+	
+	@GetMapping("/login-error")
+	public String loginError() {
+		return "login_error";
+	}
+	
+	@GetMapping("/crear-usuario")
+	public String crearUsuario() {
+		return "crear_usuario";
+	}
+	
 	@GetMapping("/panel-usuario/{id}/listas")
 	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
 		

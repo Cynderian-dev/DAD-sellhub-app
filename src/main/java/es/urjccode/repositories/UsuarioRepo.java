@@ -9,5 +9,7 @@ import es.urjccode.models.UsuarioModel;
 public interface UsuarioRepo extends JpaRepository<UsuarioModel, Long>{
 
 	List<UsuarioModel> findByNombreContainingIgnoreCase(String texto);
+	
+	List<UsuarioModel> findByNombreAndContrasenya(String nombre, String contrasenya);
 
 }
