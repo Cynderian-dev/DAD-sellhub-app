@@ -12,6 +12,8 @@ Categoria: {{categoria}} <br>
 <input type="hidden" value="{{id}}" name="id_oferta">
 Tarjeta: <input type="number", step="1", name="input_tarjeta", required><br>
 <input type="submit", value="Comprar oferta">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 {{/oferta_seleccionada}}
 </body>

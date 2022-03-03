@@ -39,6 +39,7 @@
   <option value="{{nombre}}">{{nombre}}</option>
   {{/lista_listas}}
 </select>
+    <input type="hidden" name="_csrf" value="{{token}}"/>
 
 
 <input type="submit", value="Añadir">
@@ -48,6 +49,8 @@
 <form method="POST", action="/confirmacion-compra/{id}"> 
 <input type="hidden" value="{{id}}" name="id_oferta">
 <input type="submit", value="Comprar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 <!-- Sirve para ocultar al vendedor la opcion de compra {{/mostrar}} -->
 
@@ -55,10 +58,14 @@
 <form method="POST", action="/editar-oferta/{id}"> 
 <input type="hidden" value="{{id}}" name="id_oferta">
 <input type="submit", value="Editar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 <form method="POST", action="/borrar-oferta/{id}"> 
 <input type="hidden" value="{{id}}" name="id_oferta">
 <input type="submit", value="Borrar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 {{/borrado}}
 

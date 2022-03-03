@@ -7,6 +7,8 @@ Puntuacion (entre 1 y 10): <input type="number", step="1", name="input_puntuacio
 Comentario: <input type="text", name="input_comentario", required><br>
 
 <input type="submit", value="Enviar valoracion">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 {{/oferta_seleccionada}}
 </body>

@@ -5,10 +5,14 @@
 <form method="POST", action="/verificar">
 	Usuario: <input type="text", name="input_usuario"><br>
 	Conntraseña: <input type="password", name="input_contrasenya"><br>
+	<input type="hidden" name="_csrf" value="{{token}}"/>
+
 	<input type="submit", value="Acceder">
 </form>
 
-<form method="GET", action="/crear-usuario"> 
+<form method="GET", action="/crear-usuario">
+	<input type="hidden" name="_csrf" value="{{token}}"/>
+
 	<input type="submit", value="Registrarse">
 </form>
 

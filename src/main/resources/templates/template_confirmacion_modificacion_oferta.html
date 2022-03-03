@@ -5,6 +5,8 @@
 <h2>{{informacion}}</h2>
 <form action="/buscador-ofertas">
 <input type="submit", value="Confirmar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
 </form>
 </body>
 </html>

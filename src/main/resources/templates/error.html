@@ -4,7 +4,9 @@
 <h2>Error</h2>
 <h3>{{error}}</h3>
 <form action="/buscador-ofertas">
-<input type="submit", value="Volver al buscador de ofertas">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
+    <input type="submit", value="Volver al buscador de ofertas">
 </form>
 </body>
 </html>
