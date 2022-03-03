@@ -59,8 +59,19 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/crear-usuario")
-	public String crearUsuario() {
+	public String mostrarNuevoUsuario() {
 		return "crear_usuario";
+	}
+	
+	@PostMapping("/nuevo-usuario")
+	public String nuevoUsuario(Model model,
+			@RequestParam("input_usuario") String usuario,
+			@RequestParam("input_contrasenya") String contrasenya) {
+		
+		UsuarioModel nuevoUsu = new UsuarioModel(usuario, contrasenya);
+		usuarioRepo.save(nuevoUsu);
+		model.addAttribute("informacion", "El usuario ha sido creado correctamente");
+		return "template_confirmacion_modificacion_oferta";
 	}
 	
 	@GetMapping("/panel-usuario/{id}/listas")

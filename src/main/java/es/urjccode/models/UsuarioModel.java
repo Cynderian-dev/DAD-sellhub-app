@@ -27,7 +27,7 @@ public class UsuarioModel {
 		
 	}
 
-	public UsuarioModel(String nombre, String contrasenya, List<ListaModel> listas_usuario) {
+	public UsuarioModel(String nombre, String contrasenya) {
 		this.nombre = nombre;
 		this.contrasenya = contrasenya;
 		this.cantidadValoraciones = 0;

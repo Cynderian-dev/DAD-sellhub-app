@@ -292,10 +292,10 @@ public class OfertaController {
 	@PostConstruct
 	public void init() {
 		
-		UsuarioModel usu1 = new UsuarioModel("Patxi", "contrasenya", new ArrayList<ListaModel>());
-		UsuarioModel usu2 = new UsuarioModel("Pepe", "contrasenya",	new ArrayList<ListaModel>());
-		UsuarioModel usu3 = new UsuarioModel("Juan", "contrasenya",	new ArrayList<ListaModel>());
-		UsuarioModel usu4 = new UsuarioModel("Javier", "contrasenya", new ArrayList<ListaModel>());
+		UsuarioModel usu1 = new UsuarioModel("Patxi", "contrasenya");
+		UsuarioModel usu2 = new UsuarioModel("Pepe", "contrasenya");
+		UsuarioModel usu3 = new UsuarioModel("Juan", "contrasenya");
+		UsuarioModel usu4 = new UsuarioModel("Javier", "contrasenya");
 		
 		usuarioRepo.saveAll(Arrays.asList(usu1, usu2, usu3, usu4));
 		
