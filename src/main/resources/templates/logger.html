@@ -2,9 +2,9 @@
 <body>
 <h1>Iniciar sesión</h1>
 
-<form method="POST", action="/verificar">
+<form method="POST", action="/login">
 	Usuario: <input type="text", name="input_usuario"><br>
-	Conntraseña: <input type="password", name="input_contrasenya"><br>
+	Contraseña: <input type="password", name="input_contrasenya"><br>
 	<input type="hidden" name="_csrf" value="{{token}}"/>
 
 	<input type="submit", value="Acceder">

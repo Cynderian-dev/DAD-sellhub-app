@@ -3,6 +3,7 @@ package es.urjccode.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,6 +36,9 @@ public class UsuarioController {
 	@Autowired
 	private ValoracionRepo valoracionRepo;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	@GetMapping("/panel-usuario/{id}/informacion")
 	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
 		
@@ -45,7 +49,7 @@ public class UsuarioController {
 	
 	@GetMapping("/login")
 	public String login() {
-		return "login";
+		return "logger";
 	}
 	
 	@GetMapping("/logout-done")
@@ -63,15 +67,20 @@ public class UsuarioController {
 		return "crear_usuario";
 	}
 	
+	@GetMapping("/usuario-creado")
+	public String usuarioCreado() {
+		return "new_usu_creado";
+	}
+	
 	@PostMapping("/nuevo-usuario")
 	public String nuevoUsuario(Model model,
 			@RequestParam("input_usuario") String usuario,
 			@RequestParam("input_contrasenya") String contrasenya) {
 		
-		UsuarioModel nuevoUsu = new UsuarioModel(usuario, contrasenya);
+		UsuarioModel nuevoUsu = new UsuarioModel(usuario, passwordEncoder.encode(contrasenya));
 		usuarioRepo.save(nuevoUsu);
 		model.addAttribute("informacion", "El usuario ha sido creado correctamente");
-		return "template_confirmacion_modificacion_oferta";
+		return "new_usu_creado";
 	}
 	
 	@GetMapping("/panel-usuario/{id}/listas")

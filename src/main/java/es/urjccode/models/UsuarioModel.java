@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,6 +25,9 @@ public class UsuarioModel {
 	@OneToMany
 	private List<ListaModel> listasUsuario;
 	
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
+	
 	public UsuarioModel() {
 		
 	}
@@ -33,6 +38,7 @@ public class UsuarioModel {
 		this.cantidadValoraciones = 0;
 		this.puntuacion = 0.0;
 		this.listasUsuario = new ArrayList<ListaModel>();
+		this.roles = List.of("USER");
 	}
 
 	public Long getId() {
@@ -82,9 +88,14 @@ public class UsuarioModel {
 	public void setListasUsuario(List<ListaModel> listas_usuario) {
 		this.listasUsuario = listas_usuario;
 	}
+
+	public List<String> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
 	
-	
-	
-	
-	
+		
 }

@@ -63,7 +63,7 @@ public class ListaController {
 		if(lis.buscarOferta(id)) {
 			String errorConstruido = "ya tienes el elemento " + oferta.getTitulo() +" en la lista " + lis.getNombre();
 			model.addAttribute("error", errorConstruido);
-			return "error";
+			return "error_inf";
 		} else {
 			lis.addElemento(oferta);
 			listaRepo.save(lis);
@@ -133,7 +133,7 @@ public class ListaController {
 			return "template_confirmacion_modificacion_oferta";
 		} else {
 			model.addAttribute("error", "ya tienes una lista con ese nombre");
-			return "error";
+			return "error_inf";
 		}
 		
 		
@@ -156,7 +156,7 @@ public class ListaController {
 			return "redirect:/panel-usuario/" + idUsuario.toString() + "/listas";
 		} else {
 			model.addAttribute("error", "ya tienes una lista con ese nombre");
-			return "error";
+			return "error_inf";
 		}
 		
 	}

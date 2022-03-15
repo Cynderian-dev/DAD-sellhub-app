@@ -9,6 +9,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -29,6 +30,9 @@ import es.urjccode.repositories.UsuarioRepo;
 public class OfertaController {
 	
 	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
 	private Usuario usuarioSession;
 	
 	@Autowired
@@ -44,9 +48,6 @@ public class OfertaController {
 	public String mostrarBuscadorOfertas(Model model) {
 		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
 		model.addAttribute("lista_ofertas",ofertas);
-		
-		//TODO: ya no le hacemos set
-		usuarioSession.setId(1);
 		
 		// Le paso los valores del enum al modelo
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
@@ -176,12 +177,12 @@ public class OfertaController {
 				
 		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
 			model.addAttribute("error", "No es tu oferta");
-			return "error";
+			return "error_inf";
 		}
 				
 		if(oferta.getUsuarioComprador() != null) {
 			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
-			return "error";
+			return "error_inf";
 		}
 		
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
@@ -267,12 +268,12 @@ public class OfertaController {
 		
 		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
 			model.addAttribute("error", "No es tu oferta");
-			return "error";
+			return "error_inf";
 		}
 		
 		if(oferta.getUsuarioComprador() != null) {
 			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
-			return "error";
+			return "error_inf";
 		}
 		
 		List<ListaModel> lista_listas = oferta.getListas();
@@ -292,10 +293,10 @@ public class OfertaController {
 	@PostConstruct
 	public void init() {
 		
-		UsuarioModel usu1 = new UsuarioModel("Patxi", "contrasenya");
-		UsuarioModel usu2 = new UsuarioModel("Pepe", "contrasenya");
-		UsuarioModel usu3 = new UsuarioModel("Juan", "contrasenya");
-		UsuarioModel usu4 = new UsuarioModel("Javier", "contrasenya");
+		UsuarioModel usu1 = new UsuarioModel("Patxi", passwordEncoder.encode("pass"));
+		UsuarioModel usu2 = new UsuarioModel("Pepe", passwordEncoder.encode("pass"));
+		UsuarioModel usu3 = new UsuarioModel("Juan", passwordEncoder.encode("pass"));
+		UsuarioModel usu4 = new UsuarioModel("Javier", passwordEncoder.encode("pass"));
 		
 		usuarioRepo.saveAll(Arrays.asList(usu1, usu2, usu3, usu4));
 		
