@@ -44,7 +44,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		//http.authorizeRequests().antMatchers("/favicon.ico").permitAll();
 		
 		//private pages
-		http.authorizeRequests().antMatchers("/crear-oferta").hasAnyRole("USER");
 		http.authorizeRequests().anyRequest().hasAnyRole("USER");
 		
 		//login
