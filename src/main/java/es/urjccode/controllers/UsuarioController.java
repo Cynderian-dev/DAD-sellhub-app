@@ -54,28 +54,28 @@ public class UsuarioController {
 
 	@GetMapping("/login")
 	public String login() {
-		return "logger";
+		return "template_login";
 	}
 
 	@GetMapping("/logout-done")
 	public String logoutDone() {
-		return "logout_done";
+		return "template_logout_completado";
 	}
 
 	@GetMapping("/login-error")
 	public String loginError() {
-		return "login_error";
+		return "template_error_login";
 	}
 
 
 	@GetMapping("/crear-usuario")
 	public String mostrarNuevoUsuario() {
-		return "crear_usuario";
+		return "template_crear_usuario";
 	}
 	
 	@GetMapping("/usuario-creado")
 	public String usuarioCreado() {
-		return "new_usu_creado";
+		return "template_creacion_usuario_completada";
 	}
 	
 	@PostMapping("/nuevo-usuario")
@@ -86,7 +86,7 @@ public class UsuarioController {
 		UsuarioModel nuevoUsu = new UsuarioModel(usuario, passwordEncoder.encode(contrasenya));
 		usuarioRepo.save(nuevoUsu);
 		model.addAttribute("informacion", "El usuario ha sido creado correctamente");
-		return "new_usu_creado";
+		return "template_creacion_usuario_completada";
 	}
 
 	@GetMapping("/buscador-usuarios")

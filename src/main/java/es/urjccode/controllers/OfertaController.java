@@ -1,10 +1,7 @@
 package es.urjccode.controllers;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 
@@ -69,13 +66,13 @@ public class OfertaController {
 		
 		List<OfertaModel> ofertas;
 		
-		if (precioMaximo == "" && categoria.equals("TODAS")) {
+		if (Objects.equals(precioMaximo, "") && categoria.equals("TODAS")) {
 			// Búsqueda sin filtros (sólo el filtro de título)
 			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseOrderByPrecio(texto);
-		} else if (precioMaximo == "" && !categoria.equals("TODAS")) {
+		} else if (Objects.equals(precioMaximo, "") && !categoria.equals("TODAS")) {
 			// Búsqueda filtrada por categoría
 			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndCategoriaEqualsOrderByPrecio(texto, EnumCategorias.valueOf(categoria));
-		} else if (precioMaximo != "" && categoria.equals("TODAS")) {
+		} else if (!Objects.equals(precioMaximo, "") && categoria.equals("TODAS")) {
 			// Búsqueda filtrada por precio
 			ofertas = ofertaRepo.findByFechaCierreNullAndTituloContainingIgnoreCaseAndPrecioLessThanOrderByPrecio(texto, Double.parseDouble(precioMaximo));
 		} else {
@@ -177,12 +174,12 @@ public class OfertaController {
 				
 		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
 			model.addAttribute("error", "No es tu oferta");
-			return "error_inf";
+			return "template_info_error";
 		}
 				
 		if(oferta.getUsuarioComprador() != null) {
 			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
-			return "error_inf";
+			return "template_info_error";
 		}
 		
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
@@ -268,12 +265,12 @@ public class OfertaController {
 		
 		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
 			model.addAttribute("error", "No es tu oferta");
-			return "error_inf";
+			return "template_info_error";
 		}
 		
 		if(oferta.getUsuarioComprador() != null) {
 			model.addAttribute("error", "Esta oferta ya ha sido vendida, no puede ser borrada");
-			return "error_inf";
+			return "template_info_error";
 		}
 		
 		List<ListaModel> lista_listas = oferta.getListas();

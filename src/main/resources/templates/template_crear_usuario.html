@@ -1,0 +1,12 @@
+<html>
+<body>
+<h1>Nuevo usuario</h1>
+<form method="POST" action="/nuevo-usuario">
+    Usuario: <input type="text" name="input_usuario"><br>
+    Contraseña: <input type="password" name="input_contrasenya"><br>
+    <input type="submit" value="crear">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+
+</form>
+</body>
+</html>
