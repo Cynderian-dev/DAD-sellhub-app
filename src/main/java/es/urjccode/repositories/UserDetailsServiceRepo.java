@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import es.urjccode.Usuario;
+import es.urjccode.SesionUsuario;
 import es.urjccode.models.UsuarioModel;
 
 @Service
@@ -21,7 +21,7 @@ public class UserDetailsServiceRepo implements UserDetailsService{
 	private UsuarioRepo usuRepo;
 	
 	@Autowired
-	private Usuario usuarioSession;
+	private SesionUsuario sesionUsuario;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -35,7 +35,7 @@ public class UserDetailsServiceRepo implements UserDetailsService{
 			roles.add(new SimpleGrantedAuthority("ROLE_" + role));
 		}
 		
-		usuarioSession.setId(usuario.getId());
+		sesionUsuario.setId(usuario.getId());
 		
 		return new org.springframework.security.core.userdetails.User(usuario.getNombre(), usuario.getContrasenya(), roles);
 		

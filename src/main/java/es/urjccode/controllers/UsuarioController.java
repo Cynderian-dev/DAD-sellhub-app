@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.urjccode.Usuario;
+import es.urjccode.SesionUsuario;
 import es.urjccode.models.UsuarioModel;
 import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
@@ -22,7 +22,7 @@ import es.urjccode.repositories.ValoracionRepo;
 public class UsuarioController {
 	
 	@Autowired
-	private Usuario usuarioSession;
+	private SesionUsuario sesionUsuario;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -43,7 +43,7 @@ public class UsuarioController {
 		// Decide si mostrar la opción "logout" en la barra de navegación del panel de usuario
 		// Si el panel de usuario es el del usuario que está navegando, se muestra la opción "logout"
 
-		if (usuarioSession.getId() == idPanel) {
+		if (sesionUsuario.getId() == idPanel) {
 			model.addAttribute("mostrar_boton_logout", true);
 		} else {
 			model.addAttribute("mostrar_boton_logout", false);
@@ -110,7 +110,7 @@ public class UsuarioController {
 	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
 		prepararBarraNavegacionUsuario(model, id);
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(usuarioSession.getId()));
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(sesionUsuario.getId()));
 		return "templates_panel_usuario/template_panel_usuario_informacion";
 	}
 

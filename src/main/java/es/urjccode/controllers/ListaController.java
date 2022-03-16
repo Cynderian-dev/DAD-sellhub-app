@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.urjccode.Usuario;
+import es.urjccode.SesionUsuario;
 import es.urjccode.models.ListaModel;
 import es.urjccode.models.OfertaModel;
 import es.urjccode.models.UsuarioModel;
@@ -23,7 +23,7 @@ import es.urjccode.repositories.UsuarioRepo;
 public class ListaController {
 	
 	@Autowired
-	private Usuario usuarioSession;
+	private SesionUsuario sesionUsuario;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -56,7 +56,7 @@ public class ListaController {
 				
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
 		
-		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
+		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
 		List<ListaModel> lista = listaRepo.findByfkUsuarioAndNombre(usuario, input_categoria);
 		ListaModel lis = lista.get(0);
 		
@@ -122,7 +122,7 @@ public class ListaController {
 	public String crearOferta(Model model, @RequestParam String input_nombre) {
 		
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
+		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
 		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, input_nombre);
 		
 		if(listas_usuario.size() == 0) {
