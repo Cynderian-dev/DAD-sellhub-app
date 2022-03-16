@@ -3,38 +3,38 @@
 {{>template_barra_navegacion_general}}
 <h1>Buscador ofertas</h1>
 
-<form method="POST", action="/buscador-ofertas">
-Título contiene: <input type="text", name="input_texto"><br>
-Precio por debajo de: <input type="number", step="0.01", min="0", name="input_precio"><br>
-Categoría: 
-<select name="input_categoria">
-  {{#categorias}}
-  <option value="{{.}}">{{.}}</option>
-  {{/categorias}}
-  <option value="TODAS">TODAS</option>
-</select><br>
-<input type="submit", value="Buscar">
-    
+<form method="POST" , action="/buscador-ofertas">
+    Título contiene: <input type="text" , name="input_texto"><br>
+    Precio por debajo de: <input type="number" , step="0.01" , min="0" , name="input_precio"><br>
+    Categoría:
+    <select name="input_categoria">
+        {{#categorias}}
+        <option value="{{.}}">{{.}}</option>
+        {{/categorias}}
+        <option value="TODAS">TODAS</option>
+    </select><br>
 
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+    <input type="submit" , value="Buscar">
 </form>
 
 <table>
-<tr>
-	<td>Id</td>
-	<td>Titulo</td>
-	<td>Precio</td>
-	<td>Creador</td>
-	<td>Categoría</td>
-</tr>
-{{#lista_ofertas}}
-  <tr>
-    <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
-    <td>{{titulo}}</td>
-    <td>{{precio}}</td>
-    <td>{{nombreUsu}}</td>
-    <td>{{categoria}}</td>
-  </tr>
-{{/lista_ofertas}}
+    <tr>
+        <td>Id</td>
+        <td>Titulo</td>
+        <td>Precio</td>
+        <td>Creador</td>
+        <td>Categoría</td>
+    </tr>
+    {{#lista_ofertas}}
+    <tr>
+        <td><a href="/detalles-oferta/{{id}}">{{id}}</a></td>
+        <td>{{titulo}}</td>
+        <td>{{precio}}</td>
+        <td>{{nombreUsu}}</td>
+        <td>{{categoria}}</td>
+    </tr>
+    {{/lista_ofertas}}
 </table>
 </body>
 </html>
