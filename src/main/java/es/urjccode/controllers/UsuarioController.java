@@ -38,6 +38,11 @@ public class UsuarioController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+
+	private void prepararBarraNavegacionUsuario(Model model) {
+		// Decide si mostrar la opción "logout" en la barra de navegación del panel de usuario
+		// TODO
+	}
 	
 
 	@GetMapping("/login")
