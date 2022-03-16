@@ -5,13 +5,16 @@
 
 {{#usuario_seleccionado}}
 <div class="navpanelusuario">
-  <a href="/panel-usuario/{{id}}/informacion">Información</a>
-  <a href="/panel-usuario/{{id}}/listas">Mis listas</a>
-  <a href="/panel-usuario/{{id}}/ofertas">Mis ofertas</a>
-  <a href="/panel-usuario/{{id}}/valoraciones">Valoraciones</a>
-  {{#mostrar_boton_logout}}
-  <a href="/logout">Logout</a>
-  {{/mostrar_boton_logout}}
+    <a href="/panel-usuario/{{id}}/informacion">Información</a>
+    <a href="/panel-usuario/{{id}}/listas">Mis listas</a>
+    <a href="/panel-usuario/{{id}}/ofertas">Mis ofertas</a>
+    <a href="/panel-usuario/{{id}}/valoraciones">Valoraciones</a>
+    {{#mostrar_boton_logout}}
+    <form method="POST" action="/logout">
+        <input type="hidden" name="_csrf" value="{{token}}"/>
+        <input type="submit" value="Logout">
+    </form>
+    {{/mostrar_boton_logout}}
 </div>
 {{/usuario_seleccionado}}
 
