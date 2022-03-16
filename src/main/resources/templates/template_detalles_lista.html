@@ -14,9 +14,11 @@
   	<input type="hidden" value="{{id}}" name="id_oferta">
     <td><a href="/detalles-oferta/{{id}}", name="id_oferta_table">{{id}}</a></td>
     <td>{{titulo}}</td>
+		<input type="hidden" name="_csrf" value="{{token}}"/>
     <td><input type="submit", value="borrar"></td>
 	</form>
   </tr>
 {{/lista_oferta}}
+</table>
 </body>
 </html>

@@ -39,29 +39,23 @@ public class UsuarioController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@GetMapping("/panel-usuario/{id}/informacion")
-	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
-		
-		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(usuarioSession.getId()));
-		return "templates_panel_usuario/template_panel_usuario_informacion";
-	}
-	
+
 	@GetMapping("/login")
 	public String login() {
 		return "logger";
 	}
-	
+
 	@GetMapping("/logout-done")
 	public String logoutDone() {
 		return "logout_done";
 	}
-	
+
 	@GetMapping("/login-error")
 	public String loginError() {
 		return "login_error";
 	}
-	
+
+
 	@GetMapping("/crear-usuario")
 	public String mostrarNuevoUsuario() {
 		return "crear_usuario";
@@ -82,9 +76,35 @@ public class UsuarioController {
 		model.addAttribute("informacion", "El usuario ha sido creado correctamente");
 		return "new_usu_creado";
 	}
-	
+
+	@GetMapping("/buscador-usuarios")
+	public String mostrarBuscadorUsuarios(Model model) {
+
+		List<UsuarioModel> listaUsuarios = usuarioRepo.findAll();
+		model.addAttribute("lista_usuarios", listaUsuarios);
+		return "template_buscador_usuarios";
+	}
+
+	@PostMapping("/buscador-usuarios")
+	public String mostrarBuscadorUsuariosFiltrado(Model model, @RequestParam("input_texto") String texto) {
+
+		// TODO: filtrar con texto
+		List<UsuarioModel> listaUsuarios = usuarioRepo.findByNombreContainingIgnoreCase(texto);
+		model.addAttribute("lista_usuarios", listaUsuarios);
+		return "template_buscador_usuarios";
+	}
+
+	@GetMapping("/panel-usuario/{id}/informacion")
+	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
+		prepararBarraNavegacionUsuario(model);
+		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(usuarioSession.getId()));
+		return "templates_panel_usuario/template_panel_usuario_informacion";
+	}
+
 	@GetMapping("/panel-usuario/{id}/listas")
 	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
+		prepararBarraNavegacionUsuario(model);
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
@@ -96,6 +116,7 @@ public class UsuarioController {
 	
 	@GetMapping("/panel-usuario/{id}/ofertas")
 	public String mostrarOfertasUsuario(Model model, @PathVariable Long id) {
+		prepararBarraNavegacionUsuario(model);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
@@ -107,6 +128,7 @@ public class UsuarioController {
 	
 	@GetMapping("/panel-usuario/{id}/valoraciones")
 	public String mostrarValoracionesUsuario(Model model, @PathVariable Long id) {
+		prepararBarraNavegacionUsuario(model);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
@@ -115,22 +137,6 @@ public class UsuarioController {
 		
 		return "templates_panel_usuario/template_panel_usuario_valoraciones";
 	}
-	
-	@GetMapping("/buscador-usuarios")
-	public String mostrarBuscadorUsuarios(Model model) {
-		
-		List<UsuarioModel> listaUsuarios = usuarioRepo.findAll();
-		model.addAttribute("lista_usuarios", listaUsuarios);
-		return "template_buscador_usuarios";
-	}
-	
-	@PostMapping("/buscador-usuarios")
-	public String mostrarBuscadorUsuariosFiltrado(Model model, @RequestParam("input_texto") String texto) {
-		
-		// TODO: filtrar con texto
-		List<UsuarioModel> listaUsuarios = usuarioRepo.findByNombreContainingIgnoreCase(texto);
-		model.addAttribute("lista_usuarios", listaUsuarios);
-		return "template_buscador_usuarios";
-	}
+
 
 }
