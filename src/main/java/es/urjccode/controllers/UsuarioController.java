@@ -39,9 +39,16 @@ public class UsuarioController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	private void prepararBarraNavegacionUsuario(Model model) {
+	private void prepararBarraNavegacionUsuario(Model model, Long idPanel) {
 		// Decide si mostrar la opción "logout" en la barra de navegación del panel de usuario
-		// TODO
+		// Si el panel de usuario es el del usuario que está navegando, se muestra la opción "logout"
+
+		if (usuarioSession.getId() == idPanel) {
+			model.addAttribute("mostrar_boton_logout", true);
+		} else {
+			model.addAttribute("mostrar_boton_logout", false);
+		}
+
 	}
 	
 
@@ -101,7 +108,7 @@ public class UsuarioController {
 
 	@GetMapping("/panel-usuario/{id}/informacion")
 	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model);
+		prepararBarraNavegacionUsuario(model, id);
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(usuarioSession.getId()));
 		return "templates_panel_usuario/template_panel_usuario_informacion";
@@ -109,7 +116,7 @@ public class UsuarioController {
 
 	@GetMapping("/panel-usuario/{id}/listas")
 	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model);
+		prepararBarraNavegacionUsuario(model, id);
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
@@ -121,7 +128,7 @@ public class UsuarioController {
 	
 	@GetMapping("/panel-usuario/{id}/ofertas")
 	public String mostrarOfertasUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model);
+		prepararBarraNavegacionUsuario(model, id);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
@@ -133,7 +140,7 @@ public class UsuarioController {
 	
 	@GetMapping("/panel-usuario/{id}/valoraciones")
 	public String mostrarValoracionesUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model);
+		prepararBarraNavegacionUsuario(model, id);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
