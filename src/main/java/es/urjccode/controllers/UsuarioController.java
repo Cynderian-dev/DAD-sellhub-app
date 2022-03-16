@@ -1,8 +1,10 @@
 package es.urjccode.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,11 +20,10 @@ import es.urjccode.repositories.OfertaRepo;
 import es.urjccode.repositories.UsuarioRepo;
 import es.urjccode.repositories.ValoracionRepo;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class UsuarioController {
-	
-	@Autowired
-	private SesionUsuario sesionUsuario;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -39,15 +40,22 @@ public class UsuarioController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	private void prepararBarraNavegacionUsuario(Model model, Long idPanel) {
+	private void prepararBarraNavegacionUsuario(Model model, Long idPanel, HttpServletRequest request) {
 		// Decide si mostrar la opción "logout" en la barra de navegación del panel de usuario
 		// Si el panel de usuario es el del usuario que está navegando, se muestra la opción "logout"
 
-		if (sesionUsuario.getId() == idPanel) {
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+
+
+		if (usuarioActivo.getId() == idPanel) {
 			model.addAttribute("mostrar_boton_logout", true);
 		} else {
 			model.addAttribute("mostrar_boton_logout", false);
 		}
+
+
+
 
 	}
 	
@@ -106,16 +114,16 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/panel-usuario/{id}/informacion")
-	public String mostrarInformacionUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model, id);
+	public String mostrarInformacionUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
+		prepararBarraNavegacionUsuario(model, id, request);
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(sesionUsuario.getId()));
+		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(id));
 		return "templates_panel_usuario/template_panel_usuario_informacion";
 	}
 
 	@GetMapping("/panel-usuario/{id}/listas")
-	public String mostrarListasUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model, id);
+	public String mostrarListasUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
+		prepararBarraNavegacionUsuario(model, id, request);
 		
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
@@ -126,8 +134,8 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/panel-usuario/{id}/ofertas")
-	public String mostrarOfertasUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model, id);
+	public String mostrarOfertasUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
+		prepararBarraNavegacionUsuario(model, id, request);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		
@@ -138,8 +146,8 @@ public class UsuarioController {
 	}
 	
 	@GetMapping("/panel-usuario/{id}/valoraciones")
-	public String mostrarValoracionesUsuario(Model model, @PathVariable Long id) {
-		prepararBarraNavegacionUsuario(model, id);
+	public String mostrarValoracionesUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
+		prepararBarraNavegacionUsuario(model, id, request);
 		
 		UsuarioModel usuarioSeleccionado = usuarioRepo.getById(id);
 		

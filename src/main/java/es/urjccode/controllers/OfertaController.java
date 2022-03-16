@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,9 +30,6 @@ public class OfertaController {
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	
-	@Autowired
-	private SesionUsuario sesionUsuario;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -92,15 +91,16 @@ public class OfertaController {
 	}
 	
 	@GetMapping("/detalles-oferta/{id_oferta}")
-	public String mostrarDetallesOferta(Model model, @PathVariable Long id_oferta) {
+	public String mostrarDetallesOferta(Model model, HttpServletRequest request, @PathVariable Long id_oferta) {
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
 		model.addAttribute("oferta_seleccionada", oferta);
 		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
-		//TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
 		
-		if (usuario.getId() == oferta.getUsuarioCreador().getId()) {
+		if (usuarioActivo.getId() == oferta.getUsuarioCreador().getId()) {
 			if(oferta.getUsuarioComprador() == null) {
 				model.addAttribute("borrado", true);
 			} else {
@@ -130,7 +130,7 @@ public class OfertaController {
 		}*/
 		
 		
-		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuario));
+		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuarioActivo));
 		
 		return "template_detalles_oferta";
 	}
@@ -149,12 +149,15 @@ public class OfertaController {
 	
 	@PostMapping("/crear-oferta")
 	public String crearOferta(Model model,
+			HttpServletRequest request,
 			@RequestParam double input_precio,
 			@RequestParam String input_titulo,
 			@RequestParam String input_categoria) {
-		
-		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
-		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById(sesionUsuario.getId()));
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+
+		OfertaModel ofertaCreada = new OfertaModel(input_precio, input_titulo, EnumCategorias.valueOf(input_categoria), LocalDateTime.now(), usuarioRepo.getById(usuarioActivo.getId()));
 		ofertaRepo.save(ofertaCreada);
 		
 		model.addAttribute("informacion", "Su oferta ha sido creada con éxito");
@@ -164,15 +167,16 @@ public class OfertaController {
 	
 	@PostMapping("/editar-oferta/{id_oferta}")
 	public String mostrarModificarOferta(Model model,
+			HttpServletRequest request,
 			@RequestParam String id_oferta) {
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
-		
-		// TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
 				
-		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
+		if(oferta.getUsuarioCreador().getId() != usuarioActivo.getId()) {
 			model.addAttribute("error", "No es tu oferta");
 			return "template_info_error";
 		}
@@ -232,18 +236,18 @@ public class OfertaController {
 	}
 	
 	@PostMapping("/comprar-oferta/{id_oferta}")
-	public String comprarOferta(Model model, 
+	public String comprarOferta(Model model,
+			HttpServletRequest request,
 			@RequestParam String id_oferta,
 			@RequestParam double input_tarjeta) {
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
 		
-		
-		// TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
-		
-		oferta.setUsuarioComprador(usuario);
+		oferta.setUsuarioComprador(usuarioActivo);
 		LocalDateTime fecha_cierre = LocalDateTime.now();
 		oferta.setFechaCierre(fecha_cierre);
 		ofertaRepo.save(oferta);
@@ -254,16 +258,17 @@ public class OfertaController {
 	
 	@PostMapping("/borrar-oferta/{id}")
 	public String borrarOferta(Model model,
+			HttpServletRequest request,
 			@RequestParam String id_oferta) {
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 		
 		long id_ofer = Long.parseLong(id_oferta);
 		
 		OfertaModel oferta = ofertaRepo.getById(id_ofer);
 		
-		// TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
-		
-		if(oferta.getUsuarioCreador().getId() != usuario.getId()) {
+		if(oferta.getUsuarioCreador().getId() != usuarioActivo.getId()) {
 			model.addAttribute("error", "No es tu oferta");
 			return "template_info_error";
 		}
