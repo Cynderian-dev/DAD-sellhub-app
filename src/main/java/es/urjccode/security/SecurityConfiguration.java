@@ -1,4 +1,4 @@
-package es.urjccode;
+package es.urjccode.security;
 
 import java.security.SecureRandom;
 
@@ -11,13 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import es.urjccode.repositories.UserDetailsServiceRepo;
+import es.urjccode.security.RepoUserDetailsService;
 
 @Configuration
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
-	UserDetailsServiceRepo userDetailsService;
+	RepoUserDetailsService userDetailsService;
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {

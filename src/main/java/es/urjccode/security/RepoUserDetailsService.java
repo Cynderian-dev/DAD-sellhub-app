@@ -1,8 +1,9 @@
-package es.urjccode.repositories;
+package es.urjccode.security;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import es.urjccode.repositories.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,7 +16,7 @@ import es.urjccode.SesionUsuario;
 import es.urjccode.models.UsuarioModel;
 
 @Service
-public class UserDetailsServiceRepo implements UserDetailsService{
+public class RepoUserDetailsService implements UserDetailsService{
 	
 	@Autowired
 	private UsuarioRepo usuRepo;
