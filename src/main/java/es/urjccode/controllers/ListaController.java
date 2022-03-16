@@ -118,8 +118,8 @@ public class ListaController {
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
-	@PostMapping("/nueva-lista")
-	public String crearOferta(Model model, @RequestParam String input_nombre) {
+	@PostMapping("/crear-lista")
+	public String crearLista(Model model, @RequestParam String input_nombre) {
 		
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
 		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());

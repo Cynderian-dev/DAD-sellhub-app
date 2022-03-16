@@ -33,7 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/verificar").permitAll();
 		http.authorizeRequests().antMatchers("/error").permitAll();
 		http.authorizeRequests().antMatchers("/error_inf").permitAll();
-		http.authorizeRequests().antMatchers("/nuevo-usuario").permitAll();
+		http.authorizeRequests().antMatchers("/crear-usuario").permitAll();
 		http.authorizeRequests().antMatchers("/login-error").permitAll();
 		http.authorizeRequests().antMatchers("/crear-usuario").permitAll();
 		http.authorizeRequests().antMatchers("/buscador-ofertas").permitAll();

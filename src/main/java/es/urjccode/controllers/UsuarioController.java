@@ -67,21 +67,20 @@ public class UsuarioController {
 		return "template_error_login";
 	}
 
-
-	@GetMapping("/crear-usuario")
-	public String mostrarNuevoUsuario() {
-		return "template_crear_usuario";
-	}
-	
 	@GetMapping("/usuario-creado")
 	public String usuarioCreado() {
 		return "template_creacion_usuario_completada";
 	}
+
+	@GetMapping("/crear-usuario")
+	public String mostrarCrearUsuario() {
+		return "template_crear_usuario";
+	}
 	
-	@PostMapping("/nuevo-usuario")
-	public String nuevoUsuario(Model model,
-			@RequestParam("input_usuario") String usuario,
-			@RequestParam("input_contrasenya") String contrasenya) {
+	@PostMapping("/crear-usuario")
+	public String crearUsuario(Model model,
+							   @RequestParam("input_usuario") String usuario,
+							   @RequestParam("input_contrasenya") String contrasenya) {
 		
 		UsuarioModel nuevoUsu = new UsuarioModel(usuario, passwordEncoder.encode(contrasenya));
 		usuarioRepo.save(nuevoUsu);
