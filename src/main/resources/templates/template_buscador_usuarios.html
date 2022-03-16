@@ -3,19 +3,18 @@
 {{>template_barra_navegacion_general}}
 <h1>Buscador usuarios</h1>
 
-<form method="POST", action="/buscador-usuarios">
-<input type="text", name="input_texto">
-<input type="submit", value="Buscar">
-  <input type="hidden" name="_csrf" value="{{token}}"/>
-
+<form method="POST" , action="/buscador-usuarios">
+    <input type="text" , name="input_texto">
+    <input type="submit" , value="Buscar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
 </form>
 
 <table>
-{{#lista_usuarios}}
-  <tr>
-    <td><a href="/panel-usuario/{{id}}">{{nombre}}</a></td>  
-  </tr>
-{{/lista_usuarios}}
+    {{#lista_usuarios}}
+    <tr>
+        <td><a href="/panel-usuario/{{id}}">{{nombre}}</a></td>
+    </tr>
+    {{/lista_usuarios}}
 </table>
 </body>
 </html>
