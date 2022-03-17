@@ -6,15 +6,17 @@
 {{#usuario_seleccionado}}
 <div class="navpanelusuario">
     <a href="/panel-usuario/{{id}}/informacion">Información</a>
+    {{#es_propietario_panel}}
     <a href="/panel-usuario/{{id}}/listas">Mis listas</a>
     <a href="/panel-usuario/{{id}}/ofertas">Mis ofertas</a>
+    {{/es_propietario_panel}}
     <a href="/panel-usuario/{{id}}/valoraciones">Valoraciones</a>
-    {{#mostrar_boton_logout}}
+    {{#es_propietario_panel}}
     <form method="POST" action="/logout">
         <input type="hidden" name="_csrf" value="{{token}}"/>
         <input type="submit" value="Logout">
     </form>
-    {{/mostrar_boton_logout}}
+    {{/es_propietario_panel}}
 </div>
 {{/usuario_seleccionado}}
 

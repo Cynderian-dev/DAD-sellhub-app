@@ -35,7 +35,16 @@ public class ListaController {
 	private OfertaRepo ofertaRepo;
 	
 	@GetMapping("/detalles-lista/{id_lista}")
-	public String mostrarDetallesOferta(Model model, @PathVariable Long id_lista) {
+	public String mostrarDetallesOferta(Model model, HttpServletRequest request, @PathVariable Long id_lista) {
+
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+		}
+
 		
 		ListaModel lista = listaRepo.getById(id_lista);
 		List<OfertaModel> lista_oferta = lista.getElementos();
