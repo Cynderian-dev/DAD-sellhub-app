@@ -1,6 +1,5 @@
 package es.urjccode.security;
 
-import es.urjccode.SesionUsuario;
 import es.urjccode.models.UsuarioModel;
 import es.urjccode.repositories.UsuarioRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,16 +19,13 @@ public class RepoUserDetailsService implements UserDetailsService {
     @Autowired
     private UsuarioRepo usuRepo;
 
-//    @Autowired
-//    private SesionUsuario sesionUsuario;
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         UsuarioModel usuario = usuRepo.findByNombre(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
-        List<GrantedAuthority> roles = new ArrayList();
+        List<GrantedAuthority> roles = new ArrayList<GrantedAuthority>();
 
         for (String role : usuario.getRoles()) {
             roles.add(new SimpleGrantedAuthority("ROLE_" + role));

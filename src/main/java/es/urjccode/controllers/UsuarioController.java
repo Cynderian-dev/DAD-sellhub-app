@@ -2,7 +2,6 @@ package es.urjccode.controllers;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.urjccode.SesionUsuario;
 import es.urjccode.models.UsuarioModel;
 import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
