@@ -41,7 +41,16 @@ public class OfertaController {
 	private ListaRepo listaRepo;
 	
 	@GetMapping(path = {"/buscador-ofertas", ""})
-	public String mostrarBuscadorOfertas(Model model) {
+	public String mostrarBuscadorOfertas(Model model, HttpServletRequest request) {
+
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+		}
+
 		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
 		model.addAttribute("lista_ofertas",ofertas);
 		
@@ -93,25 +102,35 @@ public class OfertaController {
 	@GetMapping("/detalles-oferta/{id_oferta}")
 	public String mostrarDetallesOferta(Model model, HttpServletRequest request, @PathVariable Long id_oferta) {
 
-		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
-				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
-		
 		OfertaModel oferta = ofertaRepo.getById(id_oferta);
-		model.addAttribute("oferta_seleccionada", oferta);
-		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
-		
-		if (usuarioActivo.getId() == oferta.getUsuarioCreador().getId()) {
-			if(oferta.getUsuarioComprador() == null) {
-				model.addAttribute("borrado", true);
+
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+
+			if (usuarioActivo.getId() == oferta.getUsuarioCreador().getId()) {
+				if(oferta.getUsuarioComprador() == null) {
+					model.addAttribute("borrado", true);
+				} else {
+					model.addAttribute("borrado", false);
+				}
 			} else {
 				model.addAttribute("borrado", false);
 			}
-		} else {
-			model.addAttribute("borrado", false);
+
+			model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuarioActivo));
 		}
 		
+
+		model.addAttribute("oferta_seleccionada", oferta);
+		model.addAttribute("nombre", oferta.getUsuarioCreador().getNombre());
+		
+
+		
 		if(oferta.getUsuarioComprador() == null) {
-			System.out.println("hola");
 			model.addAttribute("mostrar", true);
 		} else {
 			model.addAttribute("mostrar", false);
@@ -130,13 +149,22 @@ public class OfertaController {
 		}*/
 		
 		
-		model.addAttribute("lista_listas", listaRepo.findByfkUsuario(usuarioActivo));
+
 		
 		return "template_detalles_oferta";
 	}
 	
 	@GetMapping("/crear-oferta")
-	public String mostrarCrearOferta(Model model) {
+	public String mostrarCrearOferta(Model model, HttpServletRequest request) {
+
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+		}
+
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
 		List<String> lista = new ArrayList<String>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {

@@ -44,15 +44,23 @@ public class UsuarioController {
 		// Decide si mostrar la opción "logout" en la barra de navegación del panel de usuario
 		// Si el panel de usuario es el del usuario que está navegando, se muestra la opción "logout"
 
-		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
-				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
-
-
-		if (usuarioActivo.getId() == idPanel) {
-			model.addAttribute("mostrar_boton_logout", true);
-		} else {
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
 			model.addAttribute("mostrar_boton_logout", false);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+
+			if (usuarioActivo.getId() == idPanel) {
+				model.addAttribute("mostrar_boton_logout", true);
+			} else {
+				model.addAttribute("mostrar_boton_logout", false);
+			}
 		}
+
+
+
 
 
 
@@ -97,7 +105,15 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/buscador-usuarios")
-	public String mostrarBuscadorUsuarios(Model model) {
+	public String mostrarBuscadorUsuarios(Model model, HttpServletRequest request) {
+
+		if (request.getUserPrincipal() == null) {
+			model.addAttribute("id_usuario_activo", null);
+		} else {
+			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
+		}
 
 		List<UsuarioModel> listaUsuarios = usuarioRepo.findAll();
 		model.addAttribute("lista_usuarios", listaUsuarios);
@@ -114,8 +130,9 @@ public class UsuarioController {
 	}
 
 	@GetMapping("/panel-usuario/{id}/informacion")
-	public String mostrarInformacionUsuario(Model model, @PathVariable Long id, HttpServletRequest request) {
+	public String mostrarInformacionUsuario(Model model,HttpServletRequest request, @PathVariable Long id) {
 		prepararBarraNavegacionUsuario(model, id, request);
+
 		// TODO: Sustituir usuario grabado a fuego por el usuario que está navegando la página
 		model.addAttribute("usuario_seleccionado", usuarioRepo.getById(id));
 		return "templates_panel_usuario/template_panel_usuario_informacion";

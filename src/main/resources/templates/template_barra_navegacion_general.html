@@ -2,5 +2,10 @@
   <a href="/buscador-ofertas">Buscador de ofertas</a>
   <a href="/buscador-usuarios">Buscador de usuarios</a>
   <a href="/crear-oferta">Crear oferta</a>
-  <a href="/panel-usuario/1/informacion">Panel de usuario</a>
+  {{#id_usuario_activo}}
+  <a href="/panel-usuario/{{id_usuario_activo}}/informacion">Panel de usuario</a>
+  {{/id_usuario_activo}}
+  {{^id_usuario_activo}}
+  <a href="/login">Panel de usuario</a>
+  {{/id_usuario_activo}}
 </div>
