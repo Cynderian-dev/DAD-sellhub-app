@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,11 +20,10 @@ import es.urjccode.repositories.ListaRepo;
 import es.urjccode.repositories.OfertaRepo;
 import es.urjccode.repositories.UsuarioRepo;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class ListaController {
-	
-	@Autowired
-	private SesionUsuario sesionUsuario;
 	
 	@Autowired
 	private UsuarioRepo usuarioRepo;
@@ -48,15 +48,18 @@ public class ListaController {
 	
 	@PostMapping("/anyadir-lista/{id_oferta}")
 	public String modificarOferta(Model model,
+			HttpServletRequest request,
 			@RequestParam String id_oferta,
 			@RequestParam String input_categoria) {
 		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 				
 		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
 		
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
+		UsuarioModel usuario =  usuarioRepo.getById(usuarioActivo.getId());
 		List<ListaModel> lista = listaRepo.findByfkUsuarioAndNombre(usuario, input_categoria);
 		ListaModel lis = lista.get(0);
 		
@@ -94,7 +97,7 @@ public class ListaController {
 		listaRepo.save(lista);
 		listaRepo.delete(lista);
 		
-		model.addAttribute("informacion", "La lista ha sido borrado con éxito");
+		model.addAttribute("informacion", "La lista ha sido borrada con éxito");
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
@@ -117,48 +120,56 @@ public class ListaController {
 		model.addAttribute("informacion", "El elemento ha sido borrado con éxito");
 		return "template_confirmacion_modificacion_oferta";
 	}
-	
-	@PostMapping("/crear-lista")
-	public String crearLista(Model model, @RequestParam String input_nombre) {
-		
-		//TODO: usuario a fuego, implementar cuando este control de usuarios usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(sesionUsuario.getId());
-		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, input_nombre);
-		
-		if(listas_usuario.size() == 0) {
-			List<OfertaModel> ofertas = new LinkedList<OfertaModel>();
-			ListaModel lista = new ListaModel(input_nombre, usuario, ofertas);
-			listaRepo.save(lista);
-			model.addAttribute("informacion", "La lista ha sido creada con éxito");
-			return "template_confirmacion_modificacion_oferta";
-		} else {
-			model.addAttribute("error", "ya tienes una lista con ese nombre");
-			return "template_info_error";
-		}
-		
-		
-	}
-	
+
 	@PostMapping("/panel-usuario/{id}/listas/crear-lista")
 	public String crearLista(
 			Model model,
-			@PathVariable("id") Long idUsuario,
+			HttpServletRequest request,
+			@PathVariable("id") Long idUsuarioPanel,
 			@RequestParam("input_nombre") String nombre) {
-		
-		UsuarioModel usuario =  usuarioRepo.getById((long) 1);
-		
-		//TODO: Comprueba si ya existe una lista del mismo nombre
-		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuario, nombre);
-		if(listas_usuario.size() == 0) {
-			ListaModel lista = new ListaModel(nombre, usuario);
+
+		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+
+		// Comprueba si ya existe una lista del mismo nombre
+		List<ListaModel> listasDeMismoNombre = listaRepo.findByfkUsuarioAndNombre(usuarioActivo, nombre);
+
+		if(listasDeMismoNombre.size() == 0) {
+			ListaModel lista = new ListaModel(nombre, usuarioActivo);
 			listaRepo.save(lista);
+
 			model.addAttribute("informacion", "La lista ha sido creada con éxito");
-			return "redirect:/panel-usuario/" + idUsuario.toString() + "/listas";
+
+			return "redirect:/panel-usuario/" + idUsuarioPanel.toString() + "/listas";
 		} else {
 			model.addAttribute("error", "ya tienes una lista con ese nombre");
+
 			return "template_info_error";
 		}
-		
+
 	}
+
+//	@PostMapping("/crear-lista")
+//	public String crearLista(Model model, @RequestParam String input_nombre, HttpServletRequest request) {
+//
+//		UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
+//				.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
+//
+//		List<ListaModel> listas_usuario = listaRepo.findByfkUsuarioAndNombre(usuarioActivo, input_nombre);
+//
+//		if(listas_usuario.size() == 0) {
+//			List<OfertaModel> ofertas = new LinkedList<OfertaModel>();
+//			ListaModel lista = new ListaModel(input_nombre, usuario, ofertas);
+//			listaRepo.save(lista);
+//			model.addAttribute("informacion", "La lista ha sido creada con éxito");
+//			return "template_confirmacion_modificacion_oferta";
+//		} else {
+//			model.addAttribute("error", "ya tienes una lista con ese nombre");
+//			return "template_info_error";
+//		}
+//
+//	}
+	
+
 
 }
