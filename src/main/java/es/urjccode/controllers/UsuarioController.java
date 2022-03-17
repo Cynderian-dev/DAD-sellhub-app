@@ -1,6 +1,7 @@
 package es.urjccode.controllers;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,16 +47,16 @@ public class UsuarioController {
 
 		if (request.getUserPrincipal() == null) {
 			model.addAttribute("id_usuario_activo", null);
-			model.addAttribute("mostrar_boton_logout", false);
+			model.addAttribute("es_propietario_panel", false);
 		} else {
 			UsuarioModel usuarioActivo = usuarioRepo.findByNombre(request.getUserPrincipal().getName())
 					.orElseThrow(() -> new UsernameNotFoundException("No se ha encontrado el usuario"));
 			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
 
-			if (usuarioActivo.getId() == idPanel) {
-				model.addAttribute("mostrar_boton_logout", true);
+			if (Objects.equals(usuarioActivo.getId(), idPanel)) {
+				model.addAttribute("es_propietario_panel", true);
 			} else {
-				model.addAttribute("mostrar_boton_logout", false);
+				model.addAttribute("es_propietario_panel", false);
 			}
 		}
 
