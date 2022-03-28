@@ -55,7 +55,7 @@ public class OfertaController {
 		
 		// Le paso los valores del enum al modelo
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
-		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		List<String> lista = new ArrayList<>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {
 			lista.add(i, listaCategorias[i].toString()); 
 		}
@@ -88,7 +88,7 @@ public class OfertaController {
 		}
 		
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
-		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		List<String> lista = new ArrayList<>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {
 			lista.add(i, listaCategorias[i].toString()); 
 		}
@@ -165,7 +165,7 @@ public class OfertaController {
 		}
 
 		EnumCategorias[] listaCategorias = EnumCategorias.values();
-		List<String> lista = new ArrayList<String>(listaCategorias.length);
+		List<String> lista = new ArrayList<>(listaCategorias.length);
 		for(int i = 0; i < listaCategorias.length; i++) {
 			lista.add(i, listaCategorias[i].toString()); 
 		}
@@ -321,11 +321,13 @@ public class OfertaController {
 	
 	@PostConstruct
 	public void init() {
-		
-		UsuarioModel usu1 = new UsuarioModel("Patxi", passwordEncoder.encode("pass"));
-		UsuarioModel usu2 = new UsuarioModel("Pepe", passwordEncoder.encode("pass"));
-		UsuarioModel usu3 = new UsuarioModel("Juan", passwordEncoder.encode("pass"));
-		UsuarioModel usu4 = new UsuarioModel("Javier", passwordEncoder.encode("pass"));
+
+		String correoTests = "serginmatonis@gmail.com";
+
+		UsuarioModel usu1 = new UsuarioModel("Patxi", passwordEncoder.encode("pass"), correoTests);
+		UsuarioModel usu2 = new UsuarioModel("Pepe", passwordEncoder.encode("pass"), correoTests);
+		UsuarioModel usu3 = new UsuarioModel("Juan", passwordEncoder.encode("pass"), correoTests);
+		UsuarioModel usu4 = new UsuarioModel("Javier", passwordEncoder.encode("pass"), correoTests);
 		
 		usuarioRepo.saveAll(Arrays.asList(usu1, usu2, usu3, usu4));
 		

@@ -19,6 +19,7 @@ public class UsuarioModel {
 	private Long id;
 	@Column(unique=true)
 	private String nombre;
+	private String correo;
 	private String contrasenya;
 	private int cantidadValoraciones;
 	private double puntuacion;
@@ -32,12 +33,13 @@ public class UsuarioModel {
 		
 	}
 
-	public UsuarioModel(String nombre, String contrasenya) {
+	public UsuarioModel(String nombre, String contrasenya, String correo) {
 		this.nombre = nombre;
+		this.correo = correo;
 		this.contrasenya = contrasenya;
 		this.cantidadValoraciones = 0;
 		this.puntuacion = 0.0;
-		this.listasUsuario = new ArrayList<ListaModel>();
+		this.listasUsuario = new ArrayList<>();
 		this.roles = List.of("USER");
 	}
 
@@ -95,6 +97,14 @@ public class UsuarioModel {
 
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
+	}
+
+	public String getCorreo() {
+		return correo;
+	}
+
+	public void setCorreo(String correo) {
+		this.correo = correo;
 	}
 	
 		

@@ -95,9 +95,10 @@ public class UsuarioController {
 	@PostMapping("/crear-usuario")
 	public String crearUsuario(Model model,
 							   @RequestParam("input_usuario") String usuario,
-							   @RequestParam("input_contrasenya") String contrasenya) {
+							   @RequestParam("input_contrasenya") String contrasenya,
+							   @RequestParam("input_correo") String correo) {
 		
-		UsuarioModel nuevoUsu = new UsuarioModel(usuario, passwordEncoder.encode(contrasenya));
+		UsuarioModel nuevoUsu = new UsuarioModel(usuario, passwordEncoder.encode(contrasenya), correo);
 		usuarioRepo.save(nuevoUsu);
 		model.addAttribute("informacion", "El usuario ha sido creado correctamente");
 		return "template_creacion_usuario_completada";
