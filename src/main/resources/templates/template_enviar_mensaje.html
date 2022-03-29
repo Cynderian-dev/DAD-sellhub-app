@@ -1,0 +1,15 @@
+<html>
+<head>
+    <title>Enviar correo a {{usuario_destino.nombre}}</title>
+</head>
+<body>
+<h1>Enviar correo a {{usuario_destino.nombre}}</h1>
+
+<form method="POST" action="/enviar-correo/{{usuario_destino.nombre}}">
+    <input type="text" name="contenido">
+    <input type="submit" value="Enviar">
+    <input type="hidden" name="_csrf" value="{{token}}"/>
+</form>
+
+</body>
+</html>
