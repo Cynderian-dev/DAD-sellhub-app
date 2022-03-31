@@ -10,11 +10,11 @@
 	</parent>
 	<groupId>es.urjccode</groupId>
 	<artifactId>sellApp</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>sellApp</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>16</java.version>
 	</properties>
 	<dependencies>
 		  
