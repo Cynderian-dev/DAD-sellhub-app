@@ -119,6 +119,13 @@ A continuación se muestran capturas de pantalla de cada página y se indica su 
 | ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
 | ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
 
+# Instalación en VM
+
+Primero crearemos la máquina virtual, en nuestro caso será una ubuntu en virtual box.
+A continuación ejecutaremos el comando: sudo apt install openjdk-16-jre-headless.
+Una vez instalado descargamos ambos jar podemos acceder desde las páginas de github y descargar los jar de la carpeta target.
+Ejecutamos: java -jar (primero del servicio interno y a continuación el de la aplicación (sellapp)).
+Finalmente abrimos el explorador, en nuestro caso sera firefox y accedemos a la ruta https://localhost:8443
 
 
 
