@@ -94,7 +94,7 @@ Representa una lista que ha creado un usuario para organizar las ofertas que le 
 ![Diagrama E/R](docs/images/diagrama_entidad_relacion.png)
 
 ## Descripción del servicio interno
-La aplicación utilizará un servicio interno (no accesible de forma directa por los usuarios) de correo/mensajería para facilitar la comunicación entre compradores o entre comprador y vendedor. Utilizando este servicio, los usuarios podrán enviar y recibir mensajes de otros usuarios (además de consultar los mensajes que se hayan enviado o recibido en el pasado).
+La aplicación utilizará un servicio interno (no accesible de forma directa por los usuarios) de correo/mensajería para facilitar la comunicación entre compradores o entre comprador y vendedor. Utilizando este servicio, los usuarios podrán enviar mensajes de correo electrónico a otros usuarios.
 
 # Navegación
 
@@ -118,6 +118,7 @@ A continuación se muestran capturas de pantalla de cada página y se indica su 
 | ![Pantalla agradecimiento compra](docs/images/Pantalla_agradecimiento_compra.png) | **Pantalla de agradecimiento de compra**: Aquí se le agradece al usuario la compra realizada en SellHub. |
 | ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
 | ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
+| ![Pantalla enviar_mensaje](docs/images/Pantalla_enviar_mensaje.png) | **Pantalla de envío de mensaje**: Permite al usuario escribir y enviar un mensaje a otro usuario. |
 
 # Instalación en VM
 
