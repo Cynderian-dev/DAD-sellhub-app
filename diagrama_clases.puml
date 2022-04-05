@@ -14,6 +14,11 @@ class           listaController
 class           valoracionController
 class           ofertaController
 
+class           correoController
+class           restController
+
+correoController -- restController
+correoController -- usuarioRepo
 
 listaRepo -- listaController
 listaRepo -- ofertaController
