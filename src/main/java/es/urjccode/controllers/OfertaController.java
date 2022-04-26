@@ -1,12 +1,18 @@
 package es.urjccode.controllers;
 
 import java.time.LocalDateTime;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -50,7 +56,7 @@ public class OfertaController {
 			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
 		}
 
-		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
+		List<OfertaModel> ofertas = obtenerOferta();
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		// Le paso los valores del enum al modelo
@@ -62,6 +68,12 @@ public class OfertaController {
 		model.addAttribute("categorias", lista);
 		
 		return "template_buscador_ofertas";
+	}
+	
+	@Cacheable("ofertas")
+	List<OfertaModel> obtenerOferta(){
+		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
+		return ofertas;
 	}
 	
 	@PostMapping("/buscador-ofertas")
@@ -174,6 +186,7 @@ public class OfertaController {
 		return "template_crear_oferta";
 	}
 	
+	@CacheEvict(cacheNames="ofertas", allEntries=true)
 	@PostMapping("/crear-oferta")
 	public String crearOferta(Model model,
 			HttpServletRequest request,
@@ -225,6 +238,7 @@ public class OfertaController {
 		return "template_editar_oferta";
 	}
 	
+	@CacheEvict(cacheNames="ofertas", allEntries=true)
 	@PostMapping("/modificar-oferta/{id_oferta}")
 	public String modificarOferta(Model model,
 			@PathVariable Long id_oferta,
@@ -245,23 +259,14 @@ public class OfertaController {
 	public String confirmacionCompra(Model model, 
 			@RequestParam String id_oferta) {
 		
-		
-		
 		Long id = Long.parseLong(id_oferta);
 		OfertaModel oferta = ofertaRepo.getById(id);
 		model.addAttribute("oferta_seleccionada", oferta);
 		
-		/*
-		//TODO: usuario a fuego, implementar cuando este control de usuarios
-		UsuarioModel usuario =  usuarioRepo.getById(usuarioSession.getId());
-		if (oferta.getUsuarioCreador().getId() == usuario.getId()) {
-			model.addAttribute("error", "No te puedes comprar a ti mismo");
-			return "error";
-		}
-		*/
 		return "template_confirmacion_compra";
 	}
 	
+	@CacheEvict(cacheNames="ofertas", allEntries=true)
 	@PostMapping("/comprar-oferta/{id_oferta}")
 	public String comprarOferta(Model model,
 			HttpServletRequest request,
@@ -283,6 +288,7 @@ public class OfertaController {
 		return "template_valoracion_oferta";
 	}
 	
+	@CacheEvict(cacheNames="ofertas", allEntries=true)
 	@PostMapping("/borrar-oferta/{id}")
 	public String borrarOferta(Model model,
 			HttpServletRequest request,
