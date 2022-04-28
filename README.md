@@ -126,7 +126,9 @@ A continuación se muestran capturas de pantalla de cada página y se indica su 
 Primero crearemos la máquina virtual, en nuestro caso será una ubuntu en virtual box.
 A continuación ejecutaremos el comando: sudo apt install openjdk-16-jre-headless.
 Una vez instalado descargamos ambos jar podemos acceder desde las páginas de github y descargar los jar de la carpeta docs/jars/.
-Ejecutamos: java -jar (primero del servicio interno y a continuación el de la aplicación (sellapp)).
+Ejecutamos: (java -jar correointerno-0.0.2.jar)
+(java -jar sellApp-1.0.0.jar)
+nota: no se utilizará instancia de mysql dado que usamos un servidor de google al cual se conecta automáticamente.
 Finalmente abrimos el explorador, en nuestro caso sera firefox y accedemos a la ruta https://localhost:8443
 
 
