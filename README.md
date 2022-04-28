@@ -128,7 +128,9 @@ A continuación ejecutaremos el comando: sudo apt install openjdk-16-jre-headles
 Una vez instalado descargamos ambos jar podemos acceder desde las páginas de github y descargar los jar de la carpeta docs/jars/.
 Ejecutamos: (java -jar correointerno-0.0.2.jar)
 (java -jar sellApp-1.0.0.jar)
-nota: no se utilizará instancia de mysql dado que usamos un servidor de google al cual se conecta automáticamente.
+
+nota: no se especifican las instrucciones de instalación de MySql dado que para la base de datos se utiliza un servidor externo en Google Cloud al que se conecta la aplicación.
+
 Finalmente abrimos el explorador, en nuestro caso sera firefox y accedemos a la ruta https://localhost:8443
 
 
