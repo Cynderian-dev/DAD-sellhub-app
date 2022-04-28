@@ -10,6 +10,7 @@ import java.util.Objects;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import es.urjccode.services.OfertaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
@@ -32,6 +33,9 @@ import es.urjccode.repositories.UsuarioRepo;
 
 @Controller
 public class OfertaController {
+
+	@Autowired
+	private OfertaService ofertaService;
 	
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -44,7 +48,8 @@ public class OfertaController {
 	
 	@Autowired
 	private ListaRepo listaRepo;
-	
+
+
 	@GetMapping(path = {"/buscador-ofertas", ""})
 	public String mostrarBuscadorOfertas(Model model, HttpServletRequest request) {
 
@@ -56,7 +61,7 @@ public class OfertaController {
 			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
 		}
 
-		List<OfertaModel> ofertas = obtenerOferta();
+		List<OfertaModel> ofertas = ofertaService.obtenerOferta(0);
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		// Le paso los valores del enum al modelo
@@ -69,12 +74,9 @@ public class OfertaController {
 		
 		return "template_buscador_ofertas";
 	}
-	
-	@Cacheable("ofertas")
-	List<OfertaModel> obtenerOferta(){
-		List<OfertaModel> ofertas = ofertaRepo.findByFechaCierreNullOrderByPrecio();
-		return ofertas;
-	}
+
+
+
 	
 	@PostMapping("/buscador-ofertas")
 	public String mostrarBuscadorOfertasFiltrado(Model model,
