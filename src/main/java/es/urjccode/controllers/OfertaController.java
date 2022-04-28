@@ -61,7 +61,7 @@ public class OfertaController {
 			model.addAttribute("id_usuario_activo", usuarioActivo.getId());
 		}
 
-		List<OfertaModel> ofertas = ofertaService.obtenerOferta(0);
+		List<OfertaModel> ofertas = ofertaService.obtenerOferta();
 		model.addAttribute("lista_ofertas",ofertas);
 		
 		// Le paso los valores del enum al modelo
