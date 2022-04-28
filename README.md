@@ -95,6 +95,7 @@ Representa una lista que ha creado un usuario para organizar las ofertas que le 
 
 ## Descripción del servicio interno
 La aplicación utilizará un servicio interno (no accesible de forma directa por los usuarios) de correo/mensajería para facilitar la comunicación entre compradores o entre comprador y vendedor. Utilizando este servicio, los usuarios podrán enviar mensajes de correo electrónico a otros usuarios.
+Repositorio: https://github.com/sergioj97/CorreoInterno.git
 
 # Navegación
 
