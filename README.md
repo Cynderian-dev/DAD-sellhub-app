@@ -95,6 +95,7 @@ Representa una lista que ha creado un usuario para organizar las ofertas que le 
 
 ## Descripción del servicio interno
 La aplicación utilizará un servicio interno (no accesible de forma directa por los usuarios) de correo/mensajería para facilitar la comunicación entre compradores o entre comprador y vendedor. Utilizando este servicio, los usuarios podrán enviar mensajes de correo electrónico a otros usuarios.
+Repositorio: https://github.com/sergioj97/CorreoInterno.git
 
 # Navegación
 
@@ -125,7 +126,11 @@ A continuación se muestran capturas de pantalla de cada página y se indica su 
 Primero crearemos la máquina virtual, en nuestro caso será una ubuntu en virtual box.
 A continuación ejecutaremos el comando: sudo apt install openjdk-16-jre-headless.
 Una vez instalado descargamos ambos jar podemos acceder desde las páginas de github y descargar los jar de la carpeta docs/jars/.
-Ejecutamos: java -jar (primero del servicio interno y a continuación el de la aplicación (sellapp)).
+Ejecutamos: (java -jar correointerno-0.0.2.jar)
+(java -jar sellApp-1.0.0.jar)
+
+nota: no se especifican las instrucciones de instalación de MySql dado que para la base de datos se utiliza un servidor externo en Google Cloud al que se conecta la aplicación.
+
 Finalmente abrimos el explorador, en nuestro caso sera firefox y accedemos a la ruta https://localhost:8443
 
 
