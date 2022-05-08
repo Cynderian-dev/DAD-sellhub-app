@@ -1,0 +1,14 @@
+version: "3.7"
+services:
+  web1:
+    build:
+      context: .
+      dockerfile: /docs/docker/web1.Dockerfile
+    ports:
+      - 8443:8443
+  serv1:
+    build:
+      context: .
+      dockerfile: /docs/docker/serv1.Dockerfile
+    ports:
+      - 3000:3000
