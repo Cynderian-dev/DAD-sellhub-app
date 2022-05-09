@@ -15,6 +15,8 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+# Vídeo explicatorio
+https://youtu.be/lh_GuJU7mko
 
 # Introducción al funcionamiento de la aplicación
 Los usuarios de SellHub pueden _crear_ ofertas y _comprar_ ofertas ya creadas. Cuando compran una oferta, deben valorar al vendedor dejando una puntuación y un comentario. Los usuarios también pueden cerrar o modificar sus ofertas, crear listas donde guardar organizadamente ofertas que les interesen, o utilizar los buscadores de ofertas/usuarios para encontrar lo que buscan.
