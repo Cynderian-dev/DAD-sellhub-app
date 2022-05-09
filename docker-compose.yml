@@ -12,4 +12,10 @@ services:
       dockerfile: docs/docker/serv1.Dockerfile
     ports:
       - 3000:3000
+  service_balancer:
+    build:
+      context: .
+      dockerfile: service_haproxy/haproxy.Dockerfile
+    ports:
+      - 84:84
  
