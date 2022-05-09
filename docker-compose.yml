@@ -5,15 +5,13 @@ services:
     build:
       context: .
       dockerfile: docs/docker/web1.Dockerfile
-    ports:
-      - 8443:8443
+    depends_on:
+      - mail_balancer
   serv1:
     container_name: serv1
     build:
       context: .
       dockerfile: docs/docker/serv1.Dockerfile
-    ports:
-      - 3000:3000
   service_balancer:
     container_name: service_balancer
     build:
@@ -22,4 +20,16 @@ services:
     ports:
       - 84:84
       - 83:83
+    depends_on:
+      - web1
+  mail_balancer:
+    container_name: mail_balancer
+    build:
+      context: .
+      dockerfile: mail_haproxy/haproxy.Dockerfile
+    ports:
+      - 81:81
+      - 82:82
+    depends_on:
+      - serv1
  
