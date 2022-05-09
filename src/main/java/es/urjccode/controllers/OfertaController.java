@@ -327,7 +327,7 @@ public class OfertaController {
 		return "template_confirmacion_modificacion_oferta";
 	}
 	
-	@PostConstruct
+	//@PostConstruct
 	public void init() {
 
 		String correoTests = "serginmatonis@gmail.com";

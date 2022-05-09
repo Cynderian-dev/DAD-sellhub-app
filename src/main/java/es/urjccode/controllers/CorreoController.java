@@ -62,7 +62,7 @@ public class CorreoController {
 
         HttpEntity<MultiValueMap<String, String>> requestServicio = new HttpEntity<>(parametros, headers);
 
-        ResponseEntity<String> result = restTemplate.postForEntity("http://mail_balancer:81/correo", requestServicio, String.class);
+        ResponseEntity<String> result = restTemplate.postForEntity("http://serv1:3000/correo", requestServicio, String.class);
 
         System.out.println(result);
 

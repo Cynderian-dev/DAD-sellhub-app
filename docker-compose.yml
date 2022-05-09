@@ -7,6 +7,13 @@ services:
       dockerfile: docs/docker/web1.Dockerfile
     depends_on:
       - mail_balancer
+  web2:
+    container_name: web2
+    build:
+      context: .
+      dockerfile: docs/docker/web1.Dockerfile
+    depends_on:
+      - mail_balancer
   serv1:
     container_name: serv1
     build:
@@ -28,7 +35,7 @@ services:
       context: .
       dockerfile: mail_haproxy/haproxy.Dockerfile
     ports:
-      - 81:81
+      - 8080:8080
       - 82:82
     depends_on:
       - serv1
