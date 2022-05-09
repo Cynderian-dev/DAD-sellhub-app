@@ -1,18 +1,21 @@
 version: "3.7"
 services:
   web1:
+    container_name: web1
     build:
       context: .
       dockerfile: docs/docker/web1.Dockerfile
     ports:
       - 8443:8443
   serv1:
+    container_name: serv1
     build:
       context: .
       dockerfile: docs/docker/serv1.Dockerfile
     ports:
       - 3000:3000
   service_balancer:
+    container_name: service_balancer
     build:
       context: .
       dockerfile: service_haproxy/haproxy.Dockerfile
