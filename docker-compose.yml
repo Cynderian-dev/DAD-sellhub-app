@@ -21,4 +21,5 @@ services:
       dockerfile: service_haproxy/haproxy.Dockerfile
     ports:
       - 84:84
+      - 83:83
  
