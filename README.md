@@ -11,6 +11,9 @@
   * [Descripción del servicio interno](#descripción-del-servicio-interno)
 - [Diagramas del modelo de datos](#diagramas-del-modelo-de-datos)
 - [Navegación](#navegación)
+- [Diagrama de despliegue cloud](#diagrama-de-despliegue-cloud)
+- [Instalacion en VM](#instalación-en-vm)
+
 
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
@@ -122,6 +125,9 @@ A continuación se muestran capturas de pantalla de cada página y se indica su 
 | ![Pantalla modificacion oferta](docs/images/Pantalla_modificar_oferta.png) | **Pantalla de modificación de oferta**: Desde aquí se puede modificar una oferta. |
 | ![Pantalla confirmacion modificacion](docs/images/Pantalla_confirmacion_modificacion.png) | **Pantalla de confirmación de modifiación de oferta**: Le indica al usuario que su modificación se ha realizado correctamente. |
 | ![Pantalla enviar_mensaje](docs/images/Pantalla_enviar_mensaje.png) | **Pantalla de envío de mensaje**: Permite al usuario escribir y enviar un mensaje a otro usuario. |
+
+# Diagrama de despliegue cloud
+![Diagrama de despliegue cloud](docs/images/diagrama_contenedores.png)
 
 # Instalación en VM
 
